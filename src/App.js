@@ -27,31 +27,25 @@ class App extends Component {
       <Router>
         <div className="min-h-screen flex flex-col">
 
-          {/* Main content area */}
-          <div className="flex-grow">
+          {/* Home route */}
+          <Route
+            exact path="/"
+            render={(props) => <Home {...props} callbackFromApp={this.fetcherCallback}/>}
+          />
 
-            {/* Home route */}
-            <Route
-              exact path="/"
-              render={(props) => <Home {...props} callbackFromApp={this.fetcherCallback}/>}
-            />
+          {/* Overview route */}
+          <Route
+            path="/overview"
+            render={(props) => <Overview {...props} student={this.state.student}/>}
+          />
 
-            {/* Overview route */}
-            <Route
-              path="/overview"
-              render={(props) => <Overview {...props} student={this.state.student}/>}
-            />
+          {/* Help route */}
+          <Route path="/help" component={Help}/>
 
-            {/* Help route */}
-            <Route path="/help" component={Help}/>
-          </div>
 
-          {/* Sticky footer */}
-          <div className="flex-grow"/>
-          <div className="text-center">
-            <Footer/>
-          </div>
-
+          {/* Fixed footer with spacing*/}
+          <div className="h-10"/>
+          <Footer/>
         </div>
       </Router>
     );

@@ -40,7 +40,8 @@ class Overview extends Component {
     console.log(this.state.student);
     return (
       <div>
-        <Header firstName={this.state.student.firstName} lastName={this.state.student.lastName} CWID={this.state.student.CWID}/>
+        <Header firstName={this.state.student.firstName} lastName={this.state.student.lastName}
+                CWID={this.state.student.CWID}/>
         <RequirementsTab requirements={this.state.student.requirements}/>
       </div>
     );
@@ -49,25 +50,25 @@ class Overview extends Component {
 
 function Header(props) {
   return (
-    <div className="flex justify-between">
+    <div className="block sm:flex sm:justify-between">
 
       {/* Left side header */}
       <div>
-        <h1 className="pl-8 pt-8 text-grey-darkest">Overview</h1>
-        <p className="pl-8 pt-2 text-grey-dark">View your degree progress</p>
+        <p className="text-3xl text-center sm:text-left sm:pl-8 pt-8 text-grey-darkest">Overview</p>
+        <p className="text-center sm:text-left sm:pl-8 pt-1 text-grey-dark">View your degree progress</p>
       </div>
 
       {/* Right side header */}
-      <div className="text-lg">
+      <div>
         {/* Name */}
-        <p className="pr-8 pt-8 text-right text-grey-darkest font-bold">
+        <p className="sml:pr-8 pt-10 text-center sm:text-right text-grey-darkest font-extrabold">
           {props.firstName} {props.lastName}
         </p>
 
         {/* CWID */}
-        <div className="pr-8 pt-1 text-right text-grey-darkest tracking-wide">
+        <p className="sm:pr-8 pt-1 text-center sm:text-right text-grey-dark">
           {props.CWID}
-        </div>
+        </p>
       </div>
     </div>
   );
@@ -88,9 +89,6 @@ function RequirementsTab(props) {
       <Requirement name={"Minium Liberal Arts Credits"} status={props.requirements.hasMinLibArts}/>
       <Requirement name={"Skill Requirement"} status={props.requirements.hasSkill}/>
       <Requirement name={"Last 30 Credits at Marist"} status={props.requirements.isLast30Credits}/>
-
-
-
     </div>
   );
 }
@@ -103,7 +101,7 @@ function Requirement(props) {
       <div className="flex flex-row my-4 shadow-md rounded-lg bg-grey-lighter hover:bg-grey-light">
         <div className="flex-shrink">
           {props.status === "COMPLETE" ? (
-          <FaRegCheckCircle className="mt-2 ml-12 text-4xl text-green-dark opacity-75"/>
+            <FaRegCheckCircle className="mt-2 ml-12 text-4xl text-green-dark opacity-75"/>
           ) : (
             <FaTimesCircle className="mt-2 ml-12 text-4xl text-red opacity-75"/>
           )
@@ -116,7 +114,6 @@ function Requirement(props) {
     );
   }
 }
-
 
 
 export default Overview;
