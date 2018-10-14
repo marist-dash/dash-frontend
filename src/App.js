@@ -1,26 +1,59 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react';
+import {Route, BrowserRouter as Router} from "react-router-dom";
+import Home from "./containers/Home";
+import Overview from "./containers/Overview";
+import Help from "./containers/Help";
+import Footer from "./utils/Footer";
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      requestSent: false,
+      responseReceived: false,
+    };
+  };
+
+  fetcherCallback = (studentResponse) => {
+    this.setState({
+      student: studentResponse,
+    });
+  };
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+
+      <Router>
+        <div className="min-h-screen flex flex-col">
+
+          {/* Main content area */}
+          <div className="flex-grow">
+
+            {/* Home route */}
+            <Route
+              exact path="/"
+              render={(props) => <Home {...props} callbackFromApp={this.fetcherCallback}/>}
+            />
+
+            {/* Overview route */}
+            <Route
+              path="/overview"
+              render={(props) => <Overview {...props} student={this.state.student}/>}
+            />
+
+            {/* Help route */}
+            <Route path="/help" component={Help}/>
+          </div>
+
+          {/* Sticky footer */}
+          <div className="flex-grow"/>
+          <div className="text-center">
+            <Footer/>
+          </div>
+
+        </div>
+      </Router>
     );
   }
 }
