@@ -6271,6 +6271,14 @@ table {
   }
 }
 
+.w-80 {
+  width: 20rem;
+}
+
+.profile {
+  width: 30rem;
+}
+
 @media (min-width: 576px) {
   .sm\:list-reset {
     list-style: none;

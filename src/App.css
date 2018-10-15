@@ -28,3 +28,11 @@
         transform: rotate(359deg);
     }
 }
+
+.w-80 {
+    width: 20rem;
+}
+
+.profile {
+    width: 30rem;
+}

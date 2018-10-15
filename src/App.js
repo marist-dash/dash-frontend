@@ -44,7 +44,7 @@ class App extends Component {
 
 
           {/* Fixed footer with spacing*/}
-          <div className="h-10"/>
+          <div className="h-16"/>
           <Footer/>
         </div>
       </Router>
