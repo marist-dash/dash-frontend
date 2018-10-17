@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
+import { withRouter} from 'react-router-dom'
 import {connect} from "react-redux";
+import {FaFileExport} from "react-icons/fa";
 
 const axios = require('axios');
 const BROWSER_ENDPOINT = "http://maristdash.tk:8080";
@@ -22,10 +24,12 @@ class Form extends Component {
   };
 
   handleSubmit = (event) => {
+    event.preventDefault();
     this.getDegreeWorksText();
     this.props.dispatch({
       type: "REQUEST_SENT"
     });
+    this.props.history.push('/overview');
   };
 
   getDegreeWorksText = () => {
@@ -59,10 +63,9 @@ class Form extends Component {
     })
       .then((response) => {
         this.props.dispatch({
-          type: 'RESPONSE_RECEIVED'
+          type: 'STUDENT',
+          student: response.data
         });
-        console.log(response.data);
-        this.props.callbackFromHome(response.data);
       })
       .catch(function (response) {
         //handle error
@@ -82,35 +85,39 @@ class Form extends Component {
             </label>
             <input
               name="username"
+              value={this.props.username}
               onChange={this.handleChange}
               id="username"
               autoFocus
               className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline"
               type="text"
-              placeholder="Username"/>
+              placeholder="firstname.lastname1"/>
           </div>
 
           {/* Password */}
-          <div className="mb-6">
+          <div className="mb-4">
             <label className="block text-grey-darker text-sm font-bold mb-2" htmlFor="password">
               Password
             </label>
             <input
               name="password"
+              value={this.props.password}
               onChange={this.handleChange}
               id="password"
               className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
               type="password"
-              placeholder="********"/>
+              placeholder="******"/>
           </div>
 
           {/* Submit */}
           <div className="flex justify-center">
             <button
               onClick={this.handleSubmit}
-              type="button"
-              className="bg-white hover:bg-grey-lightest text-grey-darkest font-semibold py-2 px-4 border border-grey-light rounded shadow">
-              View Report
+              className="bg-white hover:bg-grey-lightest text-grey-darkest font-semibold border border-grey-light rounded shadow">
+              <div className="flex px-3 py-2">
+                <div className="pr-2">View Report</div>
+                <div><FaFileExport/></div>
+              </div>
             </button>
           </div>
 
@@ -127,7 +134,7 @@ const mapStateToProps = (state) => ({
   username: state.username,
   password: state.password,
   requestSent: state.requestSent,
-  responseReceived: state.responseReceived
+  responseReceived: state.responseReceived,
 });
 
-export default connect(mapStateToProps)(Form);
+export default connect(mapStateToProps)(withRouter(Form));

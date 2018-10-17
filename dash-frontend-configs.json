@@ -1,0 +1,8 @@
+{
+  "version": "0.1",
+  "form_username_placeholder": "Username",
+  "form_password_placeholder": "******",
+  "form_submit_text": "View Report",
+  "dash_browser_automation_endpoint":"http://maristdash.tk:8080",
+  "dash_parse_endpoint":"http://maristdash.tk:8081"
+}

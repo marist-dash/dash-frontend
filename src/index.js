@@ -9,23 +9,16 @@ import {Provider} from 'react-redux';
 const initialState = {
   username: '',
   password: '',
-  requestSent: false,
-  responseReceived: false,
-  student: {}
 };
 
 function reducer(state = initialState, action) {
+
   switch (action.type) {
 
     case "REQUEST_SENT":
-      return {
+      return Object.assign({}, state, {
         requestSent: true
-      };
-
-    case "RESPONSE_RECEIVED":
-      return {
-        responseReceived: true
-      };
+      });
 
     case "USERNAME":
       return Object.assign({}, state, {
@@ -35,6 +28,11 @@ function reducer(state = initialState, action) {
     case "PASSWORD":
       return Object.assign({}, state, {
         password: action.password
+      });
+
+    case "STUDENT":
+      return Object.assign({}, state, {
+        student: action.student
       });
 
     default:

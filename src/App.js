@@ -7,20 +7,6 @@ import Footer from "./utils/Footer";
 
 class App extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      requestSent: false,
-      responseReceived: false,
-    };
-  };
-
-  fetcherCallback = (studentResponse) => {
-    this.setState({
-      student: studentResponse,
-    });
-  };
-
   render() {
     return (
 
@@ -28,24 +14,16 @@ class App extends Component {
         <div className="min-h-screen flex flex-col">
 
           {/* Home route */}
-          <Route
-            exact path="/"
-            render={(props) => <Home {...props} callbackFromApp={this.fetcherCallback}/>}
-          />
+          <Route exact path="/" component={Home} />
 
           {/* Overview route */}
-          <Route
-            path="/overview"
-            render={(props) => <Overview {...props} student={this.state.student}/>}
-          />
+          <Route path="/overview" component={Overview} />
 
           {/* Help route */}
           <Route path="/help" component={Help}/>
 
-
           {/* Fixed footer with spacing*/}
-          <div className="h-16"/>
-          <Footer/>
+          <Footer className="pt-10"/>
         </div>
       </Router>
     );

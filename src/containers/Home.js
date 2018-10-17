@@ -1,41 +1,55 @@
 import React, {Component} from 'react';
-import {Redirect} from "react-router-dom";
-import {connect} from "react-redux";
 import RedFox from '../utils/RedFox';
 import Form from "../utils/Form";
+import connect from "react-redux/es/connect/connect";
+import LogoutButton from "../utils/LogoutButton";
+import InitialsCircle from "../utils/InitialsCircle";
 
 class Home extends Component {
 
-  fetcherCallback = (studentResponse) => {
-    this.props.callbackFromApp(studentResponse, () => {
-      return <Redirect to='/overview'/>;
-    });
-  };
-
   render() {
+    if (!this.props.student) {
+      return (
+        <div className="h-screen bg-grey-lighter">
 
-    if (this.props.requestSent) {
-      return <Redirect to='/overview'/>
+          <div className="text-center">
+            <RedFox/>
+          </div>
+
+          <div className="flex justify-center">
+            <Form/>
+          </div>
+
+        </div>
+      );
+    } else {
+      return (
+        <div className="h-screen bg-grey-lighter">
+          <div className="flex justify-center">
+            <HomePageLogout/>
+          </div>
+        </div>
+      )
     }
-
-    return (
-      <div>
-
-        <div className="text-center">
-          <RedFox/>
-        </div>
-
-        <div className="flex justify-center">
-          <Form callbackFromHome={this.fetcherCallback}/>
-        </div>
-
-      </div>
-    );
   }
 }
 
+const HomePageLogout = () => {
+  return (
+    <div className="w-48 mt-24 pt-4 pb-8 px-4 bg-white text-center shadow-md rounded">
+      <div className="flex justify-center pb-4">
+        <InitialsCircle/>
+      </div>
+      <div>
+        <LogoutButton/>
+      </div>
+    </div>
+  );
+};
+
+
 const mapStateToProps = (state) => ({
-  requestSent: state.requestSent,
+  student: state.student,
 });
 
 export default connect(mapStateToProps)(Home);
