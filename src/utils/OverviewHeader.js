@@ -22,7 +22,6 @@ class OverviewHeader extends Component {
           {/* CWID */}
           <p className="sm:pr-8 pt-1 text-center sm:text-right text-grey-dark">
             {this.props.student.CWID}
-            20064184
           </p>
         </div>
       </div>
