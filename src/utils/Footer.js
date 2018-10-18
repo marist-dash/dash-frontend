@@ -14,6 +14,13 @@ class Footer extends Component {
         </Link>
 
         <Link to="/overview" className="text-4xl mb-1 mx-16 rounded-full text-white hover:text-grey">
+<<<<<<< Updated upstream
+=======
+          <FaHome/>
+        </Link>
+        
+        <Link to="/charts" className="text-4xl mb-1 rounded-full text-white hover:text-grey">
+>>>>>>> Stashed changes
           <FaChartPie/>
         </Link>
 
