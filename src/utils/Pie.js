@@ -1,22 +1,36 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Chart from "react-google-charts";
+import connect from "react-redux/es/connect/connect";
+
+const credsApp = () => {
+  return (
+    //<span>this.props.student.degreeProgress.creditsApplied</span>
+    //{this.props.student.degreeProgress.creditsApplied}
+    this.props.student.degreeProgress.creditsApplied
+  ); 
+};
+
+var credsNeed = 120 - credsApp;
 
 const data = [
   ['Section', 'Completed Credits'],
-		['Major Credits', 30],
+//	['Major Credits', 30],
 //	['Major 2', maj2Creds],
 //	['Major 3',     0],
-		['Minor Credits', 60],
+//	['Minor Credits', 60],
 //	['Minor 2', min2Creds],
 //	['Minor 3',     1],
-		['Core Credits', 20],
-		['Incomplete Credits', 10]
-	
+//	['Core Credits', 20],
+//	['Incomplete Credits', 10]
+//    ['Applied Credits', 40],
+    ['Test', credsApp],
+    ['Credits Left', credsNeed]
 ];
 const options = {
   height: 400,
-						pieHole: 0.55,
+						pieHole: 0.60,
+            pieSliceText: 'none',
 						pieSliceBorderColor: 'black',
             backgroundColor: '#F1F5F8',
 						slices: {
@@ -45,7 +59,8 @@ class Pie extends React.Component {
   }
 }
 
-const rootElement = document.getElementById("root");
-ReactDOM.render(<Pie />, rootElement);
+const mapStateToProps = (state) => ({
+  student: state.student
+});
 
-export default Pie;
+export default connect(mapStateToProps)(Pie);
