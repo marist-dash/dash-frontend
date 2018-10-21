@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
 import connect from "react-redux/es/connect/connect";
+import {Redirect} from "react-router-dom";
 import Profile from "../utils/Profile";
 import Requirements from "../utils/Requirements";
-import Form from "../utils/Form";
 import {FaCog} from 'react-icons/fa';
 import OverviewHeader from "../utils/OverviewHeader";
-import RedFox from "../utils/RedFox";
 
 class Overview extends Component {
 
@@ -15,7 +14,7 @@ class Overview extends Component {
         <div className="w-full h-screen bg-grey-lighter">
 
           {/* Header */ }
-            <OverviewHeader/>
+          <OverviewHeader/>
 
           <div className="flex justify-center">
             {/* Profile */}
@@ -28,23 +27,7 @@ class Overview extends Component {
       );
     } else if (!this.props.requestSent) {
       return (
-        <div className="w-full h-screen bg-grey-lighter">
-
-          <div className="text-center">
-            <RedFox/>
-          </div>
-
-          <div className="flex justify-center pt-4 pb-2">
-            <p className="p-4 rounded shadow-md text-red bg-white ">
-              Please sign in with your Marist username and password.
-            </p>
-          </div>
-
-          <div className="flex justify-center">
-            <Form/>
-          </div>
-
-        </div>
+        <Redirect to="/"/>
       );
     } else {
       return (
