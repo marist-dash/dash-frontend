@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
-import {FaHome, FaChartPie, FaQuestionCircle} from 'react-icons/fa';
+import {FaHome, FaChartPie, FaQuestionCircle, FaSignOutAlt} from 'react-icons/fa';
 
 class Footer extends Component {
 
@@ -10,14 +10,18 @@ class Footer extends Component {
 
         {/* Nav Buttons */}
         <Link to="/" className="text-4xl mb-1rounded-full text-white hover:text-grey">
-          <FaHome/>
+          <FaSignOutAlt/>
         </Link>
 
         <Link to="/overview" className="text-4xl mb-1 mx-16 rounded-full text-white hover:text-grey">
+          <FaHome/>
+        </Link>
+        
+        <Link to="/help" className="text-4xl mb-1 rounded-full text-white hover:text-grey">
           <FaChartPie/>
         </Link>
 
-        <Link to="/help" className="text-4xl mb-1 rounded-full text-white hover:text-grey">
+        <Link to="/help" className="text-4xl mb-1 mx-16 rounded-full text-white hover:text-grey">
           <FaQuestionCircle/>
         </Link>
 

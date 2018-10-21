@@ -5,6 +5,7 @@ import Profile from "../utils/Profile";
 import Requirements from "../utils/Requirements";
 import {FaCog} from 'react-icons/fa';
 import OverviewHeader from "../utils/OverviewHeader";
+import Pie from "../utils/Pie";
 
 class Overview extends Component {
 
@@ -19,7 +20,7 @@ class Overview extends Component {
           <div className="flex justify-center">
             {/* Profile */}
             <Profile student={this.props.student}/>
-
+          <Pie/>
             {/*Requirements */}
             <Requirements requirements={this.props.student.requirements}/>
           </div>
