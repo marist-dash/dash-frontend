@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { withRouter} from 'react-router-dom'
 import {connect} from "react-redux";
-import {FaFileExport} from "react-icons/fa";
+import {FaFileExport, FaCheckCircle, FaTimesCircle} from "react-icons/fa";
 
 const axios = require('axios');
 const BROWSER_ENDPOINT = "http://maristdash.tk:8080";
@@ -9,13 +9,31 @@ const PARSE_ENDPOINT = "http://maristdash.tk:8081";
 
 class Form extends Component {
 
+  constructor() {
+    super();
+    this.state = {
+      isAuthorized: true,
+      requiredUsernameLength: 1,
+      requiredPasswordLength: 6,
+    }
+  }
+
   handleChange = (event) => {
+    // reset error message
+    this.props.dispatch({
+      type: 'ERROR_MESSAGE',
+      errorMessage: ''
+    });
+
     if (event.target.name === 'username') {
       this.props.dispatch({
         type: 'USERNAME',
         username: event.target.value
       });
-    } else {
+    } else if(event.target.name === 'isAuthorized') {
+      this.setState({isAuthorized: !this.state.isAuthorized});
+    }
+    else {
       this.props.dispatch({
         type: 'PASSWORD',
         password: event.target.value
@@ -25,9 +43,21 @@ class Form extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
+
+    if (this.props.username.length < this.state.requiredUsernameLength ||
+      this.props.password.length < this.state.requiredPasswordLength ||
+      !this.state.isAuthorized) {
+      this.props.dispatch({
+        type: "ERROR_MESSAGE",
+        errorMessage: "Missing required fields"
+      });
+      return;
+    }
+
     this.getDegreeWorksText();
     this.props.dispatch({
-      type: "REQUEST_SENT"
+      type: "REQUEST_SENT",
+      value: true
     });
     this.props.history.push('/overview');
   };
@@ -46,8 +76,31 @@ class Form extends Component {
       .then((response) => {
         this.parseDegreeWorksText(response.data);
       })
-      .catch(function (response) {
-        console.log(response);
+      .catch((error) => {
+
+        // cancel request and reset password
+        this.props.dispatch({
+          type: "REQUEST_SENT",
+          value: false
+        });
+        this.props.dispatch({
+          type: "PASSWORD",
+          password: ''
+        });
+
+        // check HTTP response to display best message
+        if (error.response.status === 401) {
+          this.props.dispatch({
+            type: "ERROR_MESSAGE",
+            errorMessage: "Incorrect username and/or password"
+          });
+        } else {
+          this.props.dispatch({
+            type: "ERROR_MESSAGE",
+            errorMessage: "Unable to fetch DegreeWorks report"
+          });
+        }
+
       });
   };
 
@@ -81,7 +134,16 @@ class Form extends Component {
           {/* Username */}
           <div className="mb-4">
             <label className="block text-grey-darker text-sm font-bold mb-2" htmlFor="username">
-              Username:
+              <div className="flex justify-start">
+                <div>Username</div>
+                {
+                  this.props.username.length > this.state.requiredUsernameLength ? (
+                    <div className="ml-1 text-green-dark"><FaCheckCircle/></div>
+                  ) : (
+                    <div className="ml-1 text-red-light"><FaTimesCircle/></div>
+                  )
+                }
+              </div>
             </label>
             <input
               name="username"
@@ -91,13 +153,22 @@ class Form extends Component {
               autoFocus
               className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline"
               type="text"
-              placeholder="firstname.lastname1"/>
+              placeholder="firstname.lastname1" />
           </div>
 
           {/* Password */}
           <div className="mb-4">
             <label className="block text-grey-darker text-sm font-bold mb-2" htmlFor="password">
-              Password
+              <div className="flex justify-start">
+                <div>Password</div>
+                {
+                  this.props.password.length > this.state.requiredPasswordLength ? (
+                    <div className="ml-1 text-green-dark"><FaCheckCircle/></div>
+                  ) : (
+                    <div className="ml-1 text-red-light"><FaTimesCircle/></div>
+                  )
+                }
+              </div>
             </label>
             <input
               name="password"
@@ -106,7 +177,25 @@ class Form extends Component {
               id="password"
               className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
               type="password"
-              placeholder="******"/>
+              placeholder="******" />
+          </div>
+
+          {/* Authorization checkbox */}
+          <div className="mb-4">
+            <label className=" block text-grey-dark font-bold">
+              <input
+                name="isAuthorized"
+                value={this.state.isAuthorized}
+                onChange={this.handleChange}
+                className="mr-2 leading-tight" type="checkbox" checked={this.state.isAuthorized}/>
+              <span className="text-sm">
+                {this.state.isAuthorized ? (
+                  <span>Allow access to DegreeWorks</span>
+                ): (
+                  <span className="text-red">Allow access to DegreeWorks</span>
+                )}
+              </span>
+            </label>
           </div>
 
           {/* Submit */}
@@ -121,6 +210,15 @@ class Form extends Component {
             </button>
           </div>
 
+          {/* Display error if one exists */}
+          {this.props.errorMessage.length > 0 &&
+          <p className="mt-4 text-sm text-center">
+            <span className="mr-1 font-bold text-red-light">Error: </span>
+            <span className="text-grey-darker "> {this.props.errorMessage}</span>
+          </p>
+          }
+
+
         </form>
         <p className="text-center text-grey text-xs">
           © {new Date().getFullYear()} Dash. All rights reserved.
@@ -133,8 +231,8 @@ class Form extends Component {
 const mapStateToProps = (state) => ({
   username: state.username,
   password: state.password,
+  errorMessage: state.errorMessage,
   requestSent: state.requestSent,
-  responseReceived: state.responseReceived,
 });
 
 export default connect(mapStateToProps)(withRouter(Form));
