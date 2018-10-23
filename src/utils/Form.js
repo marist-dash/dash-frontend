@@ -10,8 +10,8 @@ const PARSE_ENDPOINT = "http://maristdash.tk:8081";
 
 class Form extends Component {
 
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       isAuthorized: true,
       requiredUsernameLength: 1,
