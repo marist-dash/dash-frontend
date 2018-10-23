@@ -29,10 +29,36 @@
     }
 }
 
-.w-80 {
-    width: 20rem;
+.form {
+    width: 22rem;
 }
 
 .profile {
     width: 30rem;
+}
+
+.my-34 {
+    margin-top: 9rem;
+    margin-bottom: 9rem;
+}
+
+.mx-34 {
+    margin-left: 8.3rem;
+    margin-right: 8.3rem;
+}
+
+
+.my-36 {
+    margin-top: 10.9rem;
+    margin-bottom: 10.9rem;
+}
+
+
+.text-6xl {
+    font-size: 4.5rem;
+}
+
+
+.h-50 {
+    height: 14rem;
 }

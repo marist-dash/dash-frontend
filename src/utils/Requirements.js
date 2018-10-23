@@ -1,22 +1,27 @@
 import React, {Component} from 'react';
 import {FaRegCheckCircle, FaTimesCircle} from "react-icons/fa";
+import connect from "react-redux/es/connect/connect";
 
 class Requirements extends Component {
   render() {
+
+    // create local requirements variable from Redux student object
+    const requirements = this.props.student.requirements;
+
     return (
-      <div className="w-80 p-4 m-8 pt-2 border-t-4 border-indigo-light rounded-b-lg shadow-lg bg-white">
+      <div className="max-w-xs p-4 m-8 pt-2 border-t-4 border-indigo-light rounded-b-lg shadow-lg bg-white">
         <p className="text-center font-bold text-lg text-grey-darkest">Requirements</p>
-        <Requirement name={"Breadth"} status={this.props.requirements.hasBreadth}/>
-        <Requirement name={"Pathway"} status={this.props.requirements.hasPathway}/>
-        <Requirement name={"Foundation"} status={this.props.requirements.hasFoundation}/>
-        <Requirement name={"Major Requirements"} status={this.props.requirements.hasMajor}/>
-        <Requirement name={"Honors Program"} status={this.props.requirements.hasHonors}/>
-        <Requirement name={"Minimum Degree Credits"} status={this.props.requirements.hasMinCredits}/>
-        <Requirement name={"2.0 GPA Requirement"} status={this.props.requirements.has20GPA}/>
-        <Requirement name={"Minium GPA"} status={this.props.requirements.hasMinGPA}/>
-        <Requirement name={"Minium Liberal Arts Credits"} status={this.props.requirements.hasMinLibArts}/>
-        <Requirement name={"Skill Requirement"} status={this.props.requirements.hasSkill}/>
-        <Requirement name={"Last 30 Credits at Marist"} status={this.props.requirements.isLast30Credits}/>
+        <Requirement name={"Breadth"} status={requirements.hasBreadth}/>
+        <Requirement name={"Pathway"} status={requirements.hasPathway}/>
+        <Requirement name={"Foundation"} status={requirements.hasFoundation}/>
+        <Requirement name={"Major Requirements"} status={requirements.hasMajor}/>
+        <Requirement name={"Honors Program"} status={requirements.hasHonors}/>
+        <Requirement name={"Minimum Degree Credits"} status={requirements.hasMinCredits}/>
+        <Requirement name={"2.0 GPA Requirement"} status={requirements.has20GPA}/>
+        <Requirement name={"Minium GPA"} status={requirements.hasMinGPA}/>
+        <Requirement name={"Minium Liberal Arts Credits"} status={requirements.hasMinLibArts}/>
+        <Requirement name={"Skill Requirement"} status={requirements.hasSkill}/>
+        <Requirement name={"Last 30 Credits at Marist"} status={requirements.isLast30Credits}/>
       </div>
     );
   }
@@ -27,7 +32,7 @@ const Requirement = (props) => {
     return null;
   } else {
     return (
-      <div className="flex flex-row my-4 shadow-md rounded bg-grey-lighter hover:bg-grey-light">
+      <div className="flex flex-row my-4 py-1 rounded bg-grey-light">
         <div className="flex-shrink">
           {props.status === "COMPLETE" ? (
             <FaRegCheckCircle className="mt-1 ml-2 text-2xl text-green-dark opacity-75"/>
@@ -44,4 +49,8 @@ const Requirement = (props) => {
   }
 };
 
-export default Requirements;
+const mapStateToProps = (state) => ({
+  student: state.student
+});
+
+export default connect(mapStateToProps)(Requirements);

@@ -5,17 +5,18 @@ import {FaFileExport, FaCheckCircle, FaTimesCircle} from "react-icons/fa";
 
 const axios = require('axios');
 const BROWSER_ENDPOINT = "http://maristdash.tk:8080";
+// const BROWSER_ENDPOINT = "https://s3.amazonaws.com/marist-dash/dash-text-example.txt";
 const PARSE_ENDPOINT = "http://maristdash.tk:8081";
 
 class Form extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       isAuthorized: true,
       requiredUsernameLength: 1,
       requiredPasswordLength: 6,
-    }
+    };
   }
 
   handleChange = (event) => {
@@ -128,7 +129,7 @@ class Form extends Component {
 
   render() {
     return (
-      <div className="w-full max-w-xs p-4">
+      <div className="form p-4">
         <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
 
           {/* Username */}
@@ -182,17 +183,17 @@ class Form extends Component {
 
           {/* Authorization checkbox */}
           <div className="mb-4">
-            <label className=" block text-grey-dark font-bold">
+            <label className=" block text-grey-darker font-bold">
               <input
                 name="isAuthorized"
                 value={this.state.isAuthorized}
                 onChange={this.handleChange}
                 className="mr-2 leading-tight" type="checkbox" checked={this.state.isAuthorized}/>
-              <span className="text-sm">
+              <span className="text-sm"> Allow access to DegreeWorks
                 {this.state.isAuthorized ? (
-                  <span>Allow access to DegreeWorks</span>
+                  <span className="ml-1 text-green-dark"><FaCheckCircle/></span>
                 ): (
-                  <span className="text-red">Allow access to DegreeWorks</span>
+                  <span className="ml-1 text-red-light"><FaTimesCircle/></span>
                 )}
               </span>
             </label>

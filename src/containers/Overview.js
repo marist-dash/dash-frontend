@@ -14,15 +14,18 @@ class Overview extends Component {
       return (
         <div className="w-full h-screen bg-grey-lighter">
 
-          {/* Header */ }
+          {/* Header */}
           <OverviewHeader/>
 
           <div className="flex justify-center">
             {/* Profile */}
-            <Profile student={this.props.student}/>
-          <Pie/>
+            <Profile/>
+
+            {/* Pie */}
+            <Pie/>
+
             {/*Requirements */}
-            <Requirements requirements={this.props.student.requirements}/>
+            <Requirements/>
           </div>
         </div>
       );
