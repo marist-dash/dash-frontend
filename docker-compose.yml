@@ -3,6 +3,7 @@ services:
   web:
     build: .
     image: dash-fronteend:0.1
+    restart: always
     ports:
       - "80:80"
     networks:
