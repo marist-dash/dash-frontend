@@ -2,7 +2,7 @@ version: '3'
 services:
   web:
     build: .
-    image: dash-fronteend:0.1
+    image: dash-frontend:0.1
     restart: always
     ports:
       - "80:80"
