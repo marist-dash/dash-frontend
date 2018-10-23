@@ -11,7 +11,7 @@ class App extends Component {
     return (
 
       <Router>
-        <div className="min-h-screen flex flex-col">
+        <div className="flex flex-col">
 
           {/* Home route */}
           <Route exact path="/" component={Home} />

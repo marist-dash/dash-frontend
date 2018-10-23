@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import Pie from '../utils/Pie';
 
 class Help extends Component {
   render() {
