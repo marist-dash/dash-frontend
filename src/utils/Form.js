@@ -5,7 +5,6 @@ import {FaFileExport, FaCheckCircle, FaTimesCircle} from "react-icons/fa";
 
 const axios = require('axios');
 const BROWSER_ENDPOINT = "http://maristdash.tk:8080";
-// const BROWSER_ENDPOINT = "https://s3.amazonaws.com/marist-dash/dash-text-example.txt";
 const PARSE_ENDPOINT = "http://maristdash.tk:8081";
 
 class Form extends Component {
