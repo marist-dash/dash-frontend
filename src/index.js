@@ -9,6 +9,7 @@ import {Provider} from 'react-redux';
 const initialState = {
   username: '',
   password: '',
+  errorMessage: ''
 };
 
 function reducer(state = initialState, action) {
@@ -17,7 +18,7 @@ function reducer(state = initialState, action) {
 
     case "REQUEST_SENT":
       return Object.assign({}, state, {
-        requestSent: true
+        requestSent: action.value
       });
 
     case "USERNAME":
@@ -28,6 +29,11 @@ function reducer(state = initialState, action) {
     case "PASSWORD":
       return Object.assign({}, state, {
         password: action.password
+      });
+
+    case "ERROR_MESSAGE":
+      return Object.assign({}, state, {
+        errorMessage: action.errorMessage
       });
 
     case "STUDENT":

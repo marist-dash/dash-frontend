@@ -54,7 +54,7 @@ const Studies = (props) => {
         <span>{props.type}</span>
       )}
       {
-        props.studies.map((study, index) => <p key={index} className="pt-1 pl-4 font-normal">{study}</p>)
+        props.studies.map((study, index) => <p key={index} className="pt-1 pl-4 font-normal">{study.name}</p>)
       }
     </div>
   );

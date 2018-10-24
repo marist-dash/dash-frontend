@@ -1,0 +1,13 @@
+version: '3'
+services:
+  web:
+    build: .
+    image: dash-frontend:0.1
+    restart: always
+    ports:
+      - "80:80"
+    networks:
+      - dash-net
+networks:
+  dash-net:
+    external: true

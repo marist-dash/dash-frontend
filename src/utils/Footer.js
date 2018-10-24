@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
+
 import {FaHome, FaChartPie, FaQuestionCircle, FaSignOutAlt} from 'react-icons/fa';
 
 class Footer extends Component {
@@ -9,6 +10,7 @@ class Footer extends Component {
       <footer className='w-full fixed pin-b pt-2 text-center bg-indigo-light'>
 
         {/* Nav Buttons */}
+
         <Link to="/" className="text-4xl mb-1 mx-16 rounded-full text-white hover:text-grey">
           <FaSignOutAlt/>
         </Link>
@@ -33,4 +35,3 @@ class Footer extends Component {
 }
 
 export default Footer;
-

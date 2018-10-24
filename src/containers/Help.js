@@ -21,9 +21,8 @@ class Help extends Component {
 
               <p className="mx-12">{"No, your information is not stored anywhere within our program. After it is used to get the data your Degreeworks, it is not used, and your credentials are gone as soon as you close out this tab. That is why you have to log in every time you pull up the page"}</p>
 
-
    </div>
-   );
+    );
   }
 }
 
