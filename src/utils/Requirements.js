@@ -32,7 +32,9 @@ const Requirement = (props) => {
     return null;
   } else {
     return (
+
       <div className="flex flex-row my-4 py-1 rounded bg-grey-light">
+
         <div className="flex-shrink">
           {props.status === "COMPLETE" ? (
             <FaRegCheckCircle className="mt-1 ml-2 text-2xl text-green-dark opacity-75"/>
