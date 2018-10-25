@@ -129,6 +129,11 @@ class Form extends Component {
   render() {
     return (
       <div className="form p-4">
+      {/*Please Login*/
+        <p className="text-center text-grey text-xs">
+          "Please log in using your Marist Credentials"
+        </p>
+    }
         <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
 
           {/* Username */}
@@ -155,6 +160,7 @@ class Form extends Component {
               type="text"
               placeholder="firstname.lastname1" />
           </div>
+
 
           {/* Password */}
           <div className="mb-4">
