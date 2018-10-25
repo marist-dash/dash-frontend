@@ -129,9 +129,9 @@ class Form extends Component {
   render() {
     return (
       <div className="form p-4">
-      {/*Please Login*/
-        <p className="text-center text-black text-s">
-          Please log in below using your Marist Credentials
+    {/*Please Login*/
+        <p className="text-center shadow appearance-none border rounded w-full py-2 px-3 text-red mb-3 leading-tight text-xs focus:outline-none focus:shadow-outline">
+          Please log in below using your Marist credentials
         </p>
     }
         <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
@@ -160,7 +160,6 @@ class Form extends Component {
               type="text"
               placeholder="firstname.lastname1" />
           </div>
-
 
           {/* Password */}
           <div className="mb-4">
