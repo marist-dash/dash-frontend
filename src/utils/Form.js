@@ -130,7 +130,7 @@ class Form extends Component {
     return (
       <div className="form p-4">
     {/*Please Login*/
-        <p className="text-center shadow appearance-none border rounded w-full py-2 px-3 text-red mb-3 leading-tight text-xs focus:outline-none focus:shadow-outline">
+        <p className="text-center shadow appearance-none border rounded w-full py-2 px-3 text-purple mb-3 leading-tight text-xs focus:outline-none focus:shadow-outline">
           Please log in below using your Marist credentials
         </p>
     }
