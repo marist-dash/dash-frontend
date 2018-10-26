@@ -59,7 +59,6 @@ class Form extends Component {
       type: "REQUEST_SENT",
       value: true
     });
-    this.props.history.push('/overview');
   };
 
   getDegreeWorksText = () => {
@@ -71,7 +70,11 @@ class Form extends Component {
       method: 'post',
       url: BROWSER_ENDPOINT,
       data: formData,
-      config: {headers: {'Content-Type': 'multipart/form-data'}}
+      config: {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }
     })
       .then((response) => {
         this.parseDegreeWorksText(response.data);

@@ -1,14 +1,19 @@
 import React, {Component} from 'react';
-import RedFox from '../utils/RedFox';
-import Form from "../utils/Form";
 import connect from "react-redux/es/connect/connect";
-import LogoutButton from "../utils/LogoutButton";
-import InitialsCircle from "../utils/InitialsCircle";
+import Profile from "../utils/Profile";
+import Requirements from "../utils/Requirements";
+import {FaCog} from 'react-icons/fa';
+import OverviewHeader from "../utils/Header";
+import Pie from "../utils/Pie";
+import RedFox from "../utils/RedFox";
+import Form from "../utils/Form";
 
 class Home extends Component {
 
   render() {
-    if (!this.props.student) {
+
+    // show login form if user hasn't logged in
+    if (!this.props.requestSent) {
       return (
         <div className="h-screen bg-grey-lighter">
 
@@ -22,34 +27,44 @@ class Home extends Component {
 
         </div>
       );
-    } else {
-      return (
-        <div className="h-screen bg-grey-lighter">
-          <div className="flex justify-center">
-            <HomePageLogout/>
-          </div>
-        </div>
-      )
     }
+
+    // if student response has been received, show report
+    if (!this.props.student) {
+      return (
+        <p className="text-center icon-spin text-5xl">
+          <FaCog/>
+        </p>
+      );
+    }
+
+    return (
+      <div className="w-full h-screen bg-grey-lighter">
+
+        {/* Header */}
+        <OverviewHeader/>
+
+        <div className="flex justify-center">
+          {/* Profile */}
+          <Profile/>
+
+          {/* Pie */}
+          <Pie/>
+
+          {/*Requirements */}
+          <Requirements/>
+        </div>
+      </div>
+    );
   }
 }
 
-const HomePageLogout = () => {
-  return (
-    <div className="w-48 mt-24 pt-4 pb-8 px-4 bg-white text-center shadow-md rounded">
-      <div className="flex justify-center pb-4">
-        <InitialsCircle/>
-      </div>
-      <div>
-        <LogoutButton/>
-      </div>
-    </div>
-  );
-};
-
 
 const mapStateToProps = (state) => ({
+  username: state.username,
+  password: state.password,
   student: state.student,
+  requestSent: state.requestSent,
 });
 
 export default connect(mapStateToProps)(Home);

@@ -3,7 +3,7 @@ import { FaSignOutAlt } from "react-icons/fa";
 
 const LogoutButton = () => (
   <button
-    className="rounded shadow-md border border-red text-indigo hover:text-red"
+    className="rounded shadow-md border border-red-light bg-grey-lightest text-red hover:bg-red-light hover:text-grey-lightest"
     onClick={doLogout}>
     <div className="flex">
       <div className="flex-1 py-2 px-2">
