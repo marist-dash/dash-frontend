@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import connect from "react-redux/es/connect/connect";
 import {Redirect} from "react-router-dom";
-import OverviewHeader from "../utils/Header";
+import Header from "../utils/Header";
 
 class Charts extends Component {
   render() {
@@ -10,7 +10,7 @@ class Charts extends Component {
         <div className="w-full h-screen bg-grey-lighter">
 
           {/* Header */}
-          <OverviewHeader/>
+          <Header/>
         </div>
       );
     }

@@ -3,7 +3,7 @@ import connect from "react-redux/es/connect/connect";
 import Profile from "../utils/Profile";
 import Requirements from "../utils/Requirements";
 import {FaCog} from 'react-icons/fa';
-import OverviewHeader from "../utils/Header";
+import Header from "../utils/Header";
 import Pie from "../utils/Pie";
 import RedFox from "../utils/RedFox";
 import Form from "../utils/Form";
@@ -42,7 +42,7 @@ class Home extends Component {
       <div className="w-full h-screen bg-grey-lighter">
 
         {/* Header */}
-        <OverviewHeader/>
+        <Header/>
 
         <div className="flex justify-center">
           {/* Profile */}
