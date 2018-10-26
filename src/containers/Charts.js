@@ -5,7 +5,7 @@ import Header from "../utils/Header";
 
 class Charts extends Component {
   render() {
-    if (this.props.requestSent) {
+    if (this.props.student) {
       return (
         <div className="w-full h-screen bg-grey-lighter">
 
@@ -21,7 +21,7 @@ class Charts extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  requestSent: state.requestSent,
+  student: state.student,
 });
 
 export default connect(mapStateToProps)(Charts);

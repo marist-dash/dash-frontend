@@ -9,7 +9,7 @@ class Header extends Component {
 
         {/* Left side */}
         <div>
-          <p className="sm:text-left sm:pl-8 pt-8 text-3xl text-center text-grey-darkest">Overview</p>
+          <p className="sm:text-left sm:pl-8 pt-8 text-3xl text-center text-grey-darkest">Dash</p>
           <p className="sm:text-left sm:pl-8 pt-1 text-center text-grey-dark">View your degree progress</p>
         </div>
 
