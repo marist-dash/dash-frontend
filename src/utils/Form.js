@@ -4,8 +4,8 @@ import {connect} from "react-redux";
 import {FaFileExport, FaCheckCircle, FaTimesCircle} from "react-icons/fa";
 
 const axios = require('axios');
-const BROWSER_ENDPOINT = "http://maristdash.tk:8080";
-const PARSE_ENDPOINT = "http://maristdash.tk:8081";
+const BROWSER_ENDPOINT = "https://dash-browser-automation.maristdash.tk";
+const PARSE_ENDPOINT = "https://dash-parse.maristdash.tk";
 
 class Form extends Component {
 
@@ -59,7 +59,6 @@ class Form extends Component {
       type: "REQUEST_SENT",
       value: true
     });
-    this.props.history.push('/overview');
   };
 
   getDegreeWorksText = () => {
@@ -71,7 +70,11 @@ class Form extends Component {
       method: 'post',
       url: BROWSER_ENDPOINT,
       data: formData,
-      config: {headers: {'Content-Type': 'multipart/form-data'}}
+      config: {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }
     })
       .then((response) => {
         this.parseDegreeWorksText(response.data);
