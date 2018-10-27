@@ -7,21 +7,19 @@ class Footer extends Component {
 
   render() {
     return (
-      <footer className='w-full fixed pin-b pt-2 text-center bg-indigo-light'>
+      <footer className='w-full flex justify-around sm:justify-center fixed pin-b text-center bg-indigo-light'>
 
         {/* Nav Buttons */}
 
-        <Link to="/" className="text-4xl mb-1 mx-16 rounded-full text-white hover:text-grey">
-
+        <Link to="/" className="text-4xl mt-2 sm:mx-20 rounded-full text-white hover:text-grey">
           <FaHome/>
         </Link>
         
-        <Link to="/charts" className="text-4xl mb-1 mx-16 rounded-full text-white hover:text-grey">
-
+        <Link to="/charts" className="text-4xl mt-2 sm:mx-20 rounded-full text-white hover:text-grey">
           <FaChartPie/>
         </Link>
 
-        <Link to="/help" className="text-4xl mb-1 mx-16 rounded-full text-white hover:text-grey">
+        <Link to="/help" className="text-4xl mt-2 sm:mx-20 rounded-full text-white hover:text-grey">
           <FaQuestionCircle/>
         </Link>
 
