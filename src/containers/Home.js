@@ -15,7 +15,7 @@ class Home extends Component {
     // show login form if user hasn't logged in
     if (!this.props.requestSent) {
       return (
-        <div className="h-screen bg-grey-lighter">
+        <div className="h-screen">
 
           <div className="text-center">
             <RedFox/>
@@ -39,7 +39,7 @@ class Home extends Component {
     }
 
     return (
-      <div className="w-full h-screen bg-grey-lighter">
+      <div className="w-full h-screen">
 
         {/* Header */}
         <Header/>
