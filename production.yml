@@ -1,19 +1,18 @@
 version: '3'
 services:
-  web:
-    build: .
-    image: dash-frontend:0.1
-    restart: always
+  frontend:
+    image: tgalske/dash-frontend:0.1
+    restart: always    
+    networks:
+      - dash-net
+    ports:
+      - 3000:80
     labels:
       - "traefik.backend=dash-frontend"
       - "traefik.docker.network=dash-net"
       - "traefik.frontend.rule=Host:www.maristdash.tk"
       - "traefik.enable=true"
       - "traefik.port=80"
-    ports:
-      - "3000:80"
-    networks:
-      - dash-net
 networks:
   dash-net:
     external: true
