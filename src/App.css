@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  background-color: #DAE1E7;
+}
+
 .icon-spin {
   -webkit-animation: icon-spin 3s infinite linear;
   animation: icon-spin 3s infinite linear;
