@@ -1,29 +1,95 @@
 import React, {Component} from 'react';
+import axios from 'axios';
+import {FaAngleDown, FaAngleUp, FaCog} from "react-icons/fa";
+
+const helpTextUrl = "https://s3.amazonaws.com/maristdash.tk/dash-help-text.json";
 
 class Help extends Component {
+
+  constructor() {
+    super();
+    this.state = {
+      helpText: []
+    }
+  }
+
+  componentDidMount() {
+    axios.get(helpTextUrl)
+      .then( (response) => {
+        this.setState({
+          helpText: response.data.helpText
+        })
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  toggleShowProps = (index) => {
+    // copy array
+    const helpText = this.state.helpText;
+    // toggle showText
+    helpText[index].showText = !helpText[index].showText
+    // replace state array with the updated array
+    this.setState({ helpText: helpText});
+  };
+
+
   render() {
+    if (this.state.helpText.length == 0) {
       return (
-          <div>
-          
-              <button disabled="true" className="w-200 p-4 m-8 pt-2 border-t-4 border-indigo-light rounded-b-lg shadow-lg bg-white text-xl font-bold">{"What is the purpose of this application?"}</button>
+        <p className="text-center icon-spin text-5xl">
+          <FaCog/>
+        </p>
+      );
+    }
+    return (
+      <div>
 
-              <p className="mx-12">{"The purpose of this application is to allow Marist students to view their progression towards graduation in a user-friendly and easy to read manner. By logging into our applications, students can take the benefit of viewing their current standing, and if they would like detailed information about a specific course, they can always visit DegreeWorks and check that information"}</p>
+        {/* Help Items */}
+        <div className="flex justify-center p-4">
+          <div className="flex flex-col max-w-lg p-2 bg-white rounded-lg shadow-lg">
+            <p className="p-2 m-2 text-center text-3xl text-grey-darkest font-bold">Common questions about Dash</p>
+            {
+              this.state.helpText.map( (helpItem, index) => {
+                return (
+                  <button
+                    onClick={() => this.toggleShowProps(index)}
+                    key={index}
+                    className="max-w-md m-2 p-2 rounded-lg text-grey-darkest bg-grey-light text-2xl text-left hover:bg-grey-lighter hover:border-grey border-2">
 
-              <button disabled="true" className="w-200 p-4 m-8 pt-2 border-t-4 border-indigo-light rounded-b-lg shadow-lg bg-white text-xl font-bold">{"How do I log in?"}</button><br></br>
+                    {/* Title and drop-down caret */}
+                    <div
+                      className="flex justify-between">
+                      <div>{helpItem.title}</div>
+                      {
+                        helpItem.showText ? (
+                          <div className="text-red-light"><FaAngleUp/></div>
+                        ) : (
+                          <div className="text-indigo"><FaAngleDown/></div>
+                        )
+                      }
 
-              <p className="mx-12">{"You use the same credentials as you would to log in myMarist or iLearn"}</p>
+                    </div>
 
-              <button disabled="true" className="w-200 p-4 m-8 pt-2 border-t-4 border-indigo-light rounded-b-lg shadow-lg bg-white text-xl font-bold">{"Why does it take so long to load?"}</button><br></br>
+                    {/* Text of help item */}
+                    <div className="pt-2">
+                      {
+                        helpItem.showText &&
+                        <p className="p-2 m-2 text-base lg:text-lg bg-white rounded-lg leading-loose border-2">{helpItem.text}</p>
+                      }
+                    </div>
 
-              <p className="mx-12">{"There's a lot going on in the background: Logging into Degreeworks, pulling data, and building the charts"}</p>
-
-              <button disabled="true" className="w-200 p-4 m-8 pt-2 border-t-4 border-indigo-light rounded-b-lg shadow-lg bg-white text-xl font-bold">{"Is my username and password being stored somewhere?"}</button><br></br>
-
-              <p className="mx-12">{"No, your information is not stored anywhere within our program. After it is used to get the data your Degreeworks, it is not used, and your credentials are gone as soon as you close out this tab. That is why you have to log in every time you pull up the page"}</p>
-
-   </div>
+                  </button>
+                );
+              })
+            }
+          </div>
+        </div>
+      </div>
     );
   }
 }
+
 
 export default Help;
