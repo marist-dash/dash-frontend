@@ -4,58 +4,68 @@ import Profile from "../utils/Profile";
 import Requirements from "../utils/Requirements";
 import {FaCog} from 'react-icons/fa';
 import Header from "../utils/Header";
-import Pie from "../utils/Pie";
+import Pies from "../utils/Pies";
 import RedFox from "../utils/RedFox";
 import Form from "../utils/Form";
 
 class Home extends Component {
 
+  constructor(props) {
+    super();
+  }
+
   render() {
 
-    // show login form if user hasn't logged in
-    if (!this.props.requestSent) {
+    if (this.props.student) {
       return (
-        <div className="h-screen">
+        <div className="flex w-full h-screen">
 
-          <div className="text-center">
-            <RedFox/>
+          <div>
+            <Profile/>
           </div>
 
-          <div className="flex justify-center">
-            <Form/>
-          </div>
+          <div className="w-full">
 
+            {/* Header */}
+            <Header/>
+
+
+            {/* Pies */}
+            <div className="flex">
+              <div className="w-1/2 flex justify-center">
+                <Pies/>
+              </div>
+
+              {/*Requirements */}
+              <div className="w-1/2">
+                <Requirements/>
+              </div>
+            </div>
+          </div>
         </div>
-      );
-    }
+      )
+    } else {
+      if (!this.props.requestSent) {
+        return (
+          <div className="h-screen">
 
-    // if student response has been received, show report
-    if (!this.props.student) {
+            <div className="text-center">
+              <RedFox/>
+            </div>
+
+            <div className="flex justify-center">
+              <Form/>
+            </div>
+
+          </div>
+        );
+      }
       return (
         <p className="text-center icon-spin text-5xl">
           <FaCog/>
         </p>
       );
     }
-
-    return (
-      <div className="w-full h-screen">
-
-        {/* Header */}
-        <Header/>
-
-        <div className="flex justify-center">
-          {/* Profile */}
-          <Profile/>
-
-          {/* Pie */}
-          <Pie/>
-
-          {/*Requirements */}
-          <Requirements/>
-        </div>
-      </div>
-    );
   }
 }
 

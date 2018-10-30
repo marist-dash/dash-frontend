@@ -1,11 +1,14 @@
 import React, {Component} from 'react';
 import connect from "react-redux/es/connect/connect";
 import InitialsCircle from "./InitialsCircle";
+import LogoutButton from "./LogoutButton";
+import {FaFileAlt, FaChalkboardTeacher} from "react-icons/fa";
 
 class Profile extends Component {
+
   render() {
     return (
-      <div className="profile h-full p-4 m-8 pt-2 border-t-4 border-indigo-light rounded-b-lg shadow-lg text-grey-darkest bg-white">
+      <div className="profile h-full pt-4 border-indigo-light border-l-4 shadow-lg text-grey-darkest bg-white">
 
         <div className="flex justify-center">
           <InitialsCircle className="flex"/>
@@ -22,43 +25,129 @@ class Profile extends Component {
         <div className="flex flex-col pt-5 text-lg">
 
           {/* School */}
-          <div className="flex pb-4">
-            <div className="font-bold w-10">School</div>
-            <div className="pl-8">{this.props.student.school}</div>
+          <div className="flex pb-6">
+            <div className="w-2/5 pr-4 font-bold text-right">School</div>
+            <div className="w-3/5">{this.props.student.school}</div>
           </div>
 
 
           {/* GPA */}
-          <div className="flex pb-4">
-            <div className="w-10 font-bold">GPA</div>
-            <div className="pl-8">{this.props.student.GPA}</div>
+          <div className="flex pb-6">
+            <div className="w-2/5 pr-4 font-bold text-right">GPA</div>
+            <div className="w-3/5">{this.props.student.GPA}</div>
           </div>
 
-          {/* Majors and minors */}
-          <Studies studies={this.props.student.majors} type={"Major"}/>
-          <Studies studies={this.props.student.minors} type={"Minor"}/>
+          {/* Advisor(s) */}
+          <div className="flex pb-4">
+            <div className="w-2/5 pr-4 font-bold text-right">
+              {this.props.student.advisors.length > 1 ? (
+                <span>Advisors</span>
+              ) : (
+                <span>Advisor</span>
+              )}
+            </div>
+            <div className="w-3/5 flex flex-col">
+              {this.props.student.advisors.map( (advisor, index) =>
+                <div key={index} className="pb-2">{advisor.firstName} {advisor.lastName}</div>
+              )}
+            </div>
+          </div>
 
+          {/* Major(s) */}
+          <div className="flex pb-4">
+            <div className="w-2/5 pr-4 font-bold text-right">
+              {this.props.student.majors.length > 1 ? (
+                <span>Majors</span>
+              ) : (
+                <span>Major</span>
+              )}
+            </div>
+            <div className="w-3/5 flex flex-col">
+              {this.props.student.majors.map( (major, index) =>
+                <div key={index} className="pb-2">{major.name}</div>
+              )}
+            </div>
+          </div>
+
+          {/* Minor(s) */}
+          {this.props.student.minors.length > 0 &&
+          <div className="flex pb-4">
+            <div className="w-2/5 pr-4 font-bold text-right">
+              {this.props.student.minors.length > 1 ? (
+                <span>Minors</span>
+              ) : (
+                <span>Minor</span>
+              )}
+            </div>
+            <div className="w-3/5 flex flex-col">
+              {this.props.student.minors.map((minor, index) =>
+                <div key={index} className="pb-2">{minor.name}</div>
+              )}
+            </div>
+          </div>
+          }
         </div>
+
+        {/* Helpful links */}
+        <div className="flex flex-col py-12">
+          <p className="pb-2 text-lg text-center text-grey-dark">Helpful Links</p>
+          <div className="flex justify-center pb-4">
+            <DegreeWorksButton />
+          </div>
+          <div className="flex justify-center pb-4">
+            <ILearnButton />
+          </div>
+          <div className="flex justify-center">
+            <LogoutButton/>
+          </div>
+        </div>
+
       </div>
     );
   }
 }
 
-// Represents a major or minor
-const Studies = (props) => {
+const DegreeWorksButton = () => {
+  const degreeWorksLink = "https://degreeworks.banner.marist.edu/dashboard/dashboard";
   return (
-    <div className="font-bold pb-4">
-      {props.studies.length > 1 ? (
-        <span>{props.type}s</span>
-      ) : (
-        <span>{props.type}</span>
-      )}
-      {
-        props.studies.map((study, index) => <p key={index} className="pt-1 pl-4 font-normal">{study.name}</p>)
-      }
+    <div>
+      <a href={degreeWorksLink} target={"_blank"}>
+        <button
+          className="rounded shadow-md border border-indigo-light bg-grey-lightest text-indigo hover:bg-indigo-light hover:text-grey-lightest">
+          <div className="flex">
+            <div className="flex-1 py-2 px-2">
+              DegreeWorks
+            </div>
+            <div className="flex-1 py-2 pr-2">
+              <FaFileAlt/>
+            </div>
+          </div>
+        </button>
+      </a>
     </div>
   );
 };
+
+const ILearnButton = () => {
+  const iLearnLink = "https://ilearn.marist.edu/";
+  return (
+    <div>
+      <a href={iLearnLink} target={"_blank"}>
+        <button
+          className="rounded shadow-md border border-indigo-light bg-grey-lightest text-indigo hover:bg-indigo-light hover:text-grey-lightest">
+          <div className="flex">
+            <div className="flex-1 py-2 px-2">
+              iLearn
+            </div>
+            <div className="flex-1 py-2 pr-2">
+              <FaChalkboardTeacher/>
+            </div>
+          </div>
+        </button>
+      </a>
+    </div>
+  );
+}
 
 const mapStateToProps = (state) => ({
   student: state.student

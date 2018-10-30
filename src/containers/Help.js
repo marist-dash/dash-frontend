@@ -36,7 +36,7 @@ class Help extends Component {
 
 
   render() {
-    if (this.state.helpText.length == 0) {
+    if (this.state.helpText.length === 0) {
       return (
         <p className="text-center icon-spin text-5xl">
           <FaCog/>
