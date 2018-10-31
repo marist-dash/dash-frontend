@@ -2,20 +2,17 @@ import React, {Component} from 'react';
 import connect from "react-redux/es/connect/connect";
 import Profile from "../utils/Profile";
 import Requirements from "../utils/Requirements";
-import {FaCog} from 'react-icons/fa';
 import Header from "../utils/Header";
 import Pies from "../utils/Pies";
 import RedFox from "../utils/RedFox";
 import Form from "../utils/Form";
+import Loading from "../utils/Loading";
 
 class Home extends Component {
 
-  constructor(props) {
-    super();
-  }
+
 
   render() {
-
     if (this.props.student) {
       return (
         <div className="flex w-full h-screen">
@@ -61,9 +58,7 @@ class Home extends Component {
         );
       }
       return (
-        <p className="text-center icon-spin text-5xl">
-          <FaCog/>
-        </p>
+        <Loading/>
       );
     }
   }

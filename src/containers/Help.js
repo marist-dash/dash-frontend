@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import {FaAngleDown, FaAngleUp, FaCog} from "react-icons/fa";
+import {FaAngleDown, FaAngleUp} from "react-icons/fa";
 
 const helpTextUrl = "https://s3.amazonaws.com/maristdash.tk/dash-help-text.json";
 
@@ -38,9 +38,9 @@ class Help extends Component {
   render() {
     if (this.state.helpText.length === 0) {
       return (
-        <p className="text-center icon-spin text-5xl">
-          <FaCog/>
-        </p>
+        <div className="flex justify-center pt-8">
+          <div className="icon-spin"/>
+        </div>
       );
     }
     return (

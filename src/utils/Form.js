@@ -118,6 +118,7 @@ class Form extends Component {
       config: {headers: {'Content-Type': 'multipart/form-data'}}
     })
       .then((response) => {
+        localStorage.setItem("STUDENT", JSON.stringify(response.data));
         this.props.dispatch({
           type: 'STUDENT',
           student: response.data

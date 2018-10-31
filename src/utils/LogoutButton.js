@@ -19,6 +19,7 @@ const LogoutButton = () => (
 );
 
 function doLogout() {
+  localStorage.clear();
   window.location.reload();
 }
 
