@@ -11,26 +11,24 @@ html {
   animation: icon-spin 3s infinite linear;
 }
 
-@-webkit-keyframes icon-spin {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(359deg);
-    transform: rotate(359deg);
-  }
+.icon-spin {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #6574CD;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 4s linear infinite; /* Safari */
+  animation: spin 4s linear infinite;
 }
 
-@keyframes icon-spin {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(359deg);
-    transform: rotate(359deg);
-  }
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .form {
@@ -38,7 +36,16 @@ html {
 }
 
 .profile {
-  width: 30rem;
+  width: 22rem;
+}
+
+.requirements {
+  width: 22rem;
+}
+
+.pie {
+  width: 25rem;
+  height: 25rem;
 }
 
 .my-34 {
