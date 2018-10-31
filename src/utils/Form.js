@@ -4,8 +4,8 @@ import {connect} from "react-redux";
 import {FaFileExport, FaCheckCircle, FaTimesCircle} from "react-icons/fa";
 
 const axios = require('axios');
-const BROWSER_ENDPOINT = "http://maristdash.tk:8080";
-const PARSE_ENDPOINT = "http://maristdash.tk:8081";
+const BROWSER_ENDPOINT = "https://dash-browser-automation.maristdash.tk";
+const PARSE_ENDPOINT = "https://dash-parse.maristdash.tk";
 
 class Form extends Component {
 
@@ -59,7 +59,6 @@ class Form extends Component {
       type: "REQUEST_SENT",
       value: true
     });
-    this.props.history.push('/overview');
   };
 
   getDegreeWorksText = () => {
@@ -71,7 +70,11 @@ class Form extends Component {
       method: 'post',
       url: BROWSER_ENDPOINT,
       data: formData,
-      config: {headers: {'Content-Type': 'multipart/form-data'}}
+      config: {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }
     })
       .then((response) => {
         this.parseDegreeWorksText(response.data);
@@ -115,6 +118,7 @@ class Form extends Component {
       config: {headers: {'Content-Type': 'multipart/form-data'}}
     })
       .then((response) => {
+        localStorage.setItem("STUDENT", JSON.stringify(response.data));
         this.props.dispatch({
           type: 'STUDENT',
           student: response.data
@@ -129,11 +133,6 @@ class Form extends Component {
   render() {
     return (
       <div className="form p-4">
-    {/*Please Login*/
-        <p className="text-center shadow appearance-none border rounded w-full py-2 px-3 text-purple mb-6 leading-tight text-xs focus:outline-none focus:shadow-outline">
-          Please log in below using your Marist credentials
-        </p>
-    }
         <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
 
           {/* Username */}
@@ -187,20 +186,18 @@ class Form extends Component {
 
           {/* Authorization checkbox */}
           <div className="mb-4">
-            <label className=" block text-grey-darker font-bold">
               <input
                 name="isAuthorized"
                 value={this.state.isAuthorized}
                 onChange={this.handleChange}
                 className="mr-2 leading-tight" type="checkbox" checked={this.state.isAuthorized}/>
-              <span className="text-sm"> Allow access to DegreeWorks
-                {this.state.isAuthorized ? (
-                  <span className="ml-1 text-green-dark"><FaCheckCircle/></span>
-                ): (
-                  <span className="ml-1 text-red-light"><FaTimesCircle/></span>
-                )}
-              </span>
-            </label>
+            <span className="text-grey-darker font-bold text-sm"> Allow access to DegreeWorks
+              {this.state.isAuthorized ? (
+                <span className="ml-1 text-green-dark"><FaCheckCircle/></span>
+              ): (
+                <span className="ml-1 text-red-light"><FaTimesCircle/></span>
+              )}
+            </span>
           </div>
 
           {/* Submit */}
