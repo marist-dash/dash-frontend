@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import connect from "react-redux/es/connect/connect";
-import LogoutButton from "./LogoutButton";
 
 class Header extends Component {
   render() {
@@ -27,11 +26,6 @@ class Header extends Component {
                 {this.props.student.CWID}
               </p>
             </div>
-
-            <div className="sm:pr-8 pt-10">
-              <LogoutButton/>
-            </div>
-
 
           </div>
 

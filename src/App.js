@@ -4,8 +4,22 @@ import Home from "./containers/Home";
 import Help from "./containers/Help";
 import Charts from "./containers/Charts";
 import Footer from "./utils/Footer";
+import connect from "react-redux/es/connect/connect";
 
 class App extends Component {
+
+  constructor(props) {
+    super();
+
+    if (null !== localStorage.getItem("STUDENT")) {
+      const studentAsString = localStorage.getItem("STUDENT");
+      const studentAsObject = JSON.parse(studentAsString);
+      props.dispatch({
+        type: 'STUDENT',
+        student: studentAsObject
+      });
+    }
+  }
 
   render() {
     return (
@@ -30,4 +44,8 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+  student: state.student,
+});
+
+export default connect(mapStateToProps) (App);
