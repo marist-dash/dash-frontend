@@ -98,24 +98,32 @@ class Pies extends React.Component {
     const pies = this.state.degreeWorksPies;
 
     return (
-      <div className="p-4 m-8 pt-2 border-t-4 border-indigo-light rounded-b-lg shadow-lg bg-white">
-        <p className="text-center font-bold text-lg text-grey-darkest">{pies[index].name} {pies[index].type} Progress</p>
-        <div className="flex justify-between text-4xl text-grey-darkest">
-          <FaArrowLeft onClick={ () => this.changePie(false)}/>
-          <FaArrowRight onClick={ () => this.changePie(true)}/>
+      <div className="w-full dash-base-width p-4 m-4 border-t-4 border-indigo-light rounded-b-lg shadow-lg bg-white">
+
+        {/* Display the title of the pie, ex: Computer Science Major Progress */}
+        <p className="h-12 text-center font-bold text-lg text-grey-darkest">{pies[index].name} {pies[index].type} Progress</p>
+
+
+        {/* Arrows */}
+        <div className="flex justify-between mx-4 pb-0 text-4xl text-grey-darkest">
+          <FaArrowLeft onClick={ () => this.changePie(false)} className="hover:text-red-light"/>
+          <FaArrowRight onClick={ () => this.changePie(true)} className="hover:text-indigo"/>
         </div>
+
+        {/* The Pie */}
         <div className="flex justify-center">
 
           {/* % in middle */ }
-          <div className="absolute my-24 text-grey-darkest bg-white">
-            <div className="flex justify-center text-6xl pt-16 pl-4">
+          <div className="absolute my-24 text-grey-darkest bg-transparent">
+            <div className="flex justify-center text-6xl pt-12 pl-4">
               <div className="">{Math.floor(pies[index].credits[0].value / (pies[index].credits[0].value + pies[index].credits[1].value) * 100)}</div>
               <div className="text-3xl mt-2">%</div>
             </div>
           </div>
-          {/* custom CSS class for width and height of pie */}
+
+
           <div className="pie">
-            <ResponsiveContainer>
+            <ResponsiveContainer height="100%" width="100%">
               <PieChart>
                 <Pie
                   dataKey="value"
@@ -137,7 +145,7 @@ class Pies extends React.Component {
         </div>
 
         {/* legend */}
-        <div className="flex flex-col">
+        <div className="flex flex-col py-4 bg-grey-light rounded-lg">
           <div className="flex justify-center pb-4 text-3xl text-indigo-dark">
             <div className="px-2">Credits Applied</div>
             <FaCircle/>

@@ -9,7 +9,7 @@ class Requirements extends Component {
     const requirements = this.props.student.requirements;
 
     return (
-      <div className="requirements p-4 m-8 pt-2 border-t-4 border-indigo-light rounded-b-lg shadow-lg bg-white">
+      <div className="w-full dash-base-width p-4 m-4 border-t-4 border-indigo-light rounded-b-lg shadow-lg bg-white">
         <p className="text-center font-bold text-lg text-grey-darkest">Requirements</p>
         <Requirement name={"Breadth"} status={requirements.hasBreadth}/>
         <Requirement name={"Pathway"} status={requirements.hasPathway}/>

@@ -2,40 +2,45 @@ import React, {Component} from 'react';
 import connect from "react-redux/es/connect/connect";
 import Profile from "../utils/Profile";
 import Requirements from "../utils/Requirements";
-import Header from "../utils/Header";
 import Pies from "../utils/Pies";
-import RedFox from "../utils/RedFox";
 import Form from "../utils/Form";
 import Loading from "../utils/Loading";
+import HelpfulLinks from "../utils/HelpfulLinks";
 
 class Home extends Component {
-
-
 
   render() {
     if (this.props.student) {
       return (
-        <div className="flex w-full h-screen">
+        <div className="w-full">
+          <div className="flex justify-center">
+            <div className="w-full max-w-5xl">
+              <div className="block xl:flex  xl:justify-center">
 
-          <div>
-            <Profile/>
-          </div>
+                <div className="xl:w-1/3">
+                  <div className="flex justify-center">
+                    <Profile/>
+                  </div>
+                  <div className="flex justify-center">
+                    <HelpfulLinks/>
+                  </div>
+                </div>
 
-          <div className="w-full">
 
-            {/* Header */}
-            <Header/>
+                {/* Pies */}
+                <div className="xl:w-1/3">
+                  <div className="flex justify-center">
+                    <Pies/>
+                  </div>
+                </div>
 
+                {/*Requirements */}
+                <div className="xl:w-1/3">
+                  <div className="flex justify-center">
+                    <Requirements/>
+                  </div>
+                </div>
 
-            {/* Pies */}
-            <div className="flex">
-              <div className="w-1/2 flex justify-center">
-                <Pies/>
-              </div>
-
-              {/*Requirements */}
-              <div className="w-1/2">
-                <Requirements/>
               </div>
             </div>
           </div>
@@ -45,10 +50,6 @@ class Home extends Component {
       if (!this.props.requestSent) {
         return (
           <div className="h-screen">
-
-            <div className="text-center">
-              <RedFox/>
-            </div>
 
             <div className="flex justify-center">
               <Form/>

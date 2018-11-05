@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import {Route, BrowserRouter as Router} from "react-router-dom";
 import Home from "./containers/Home";
 import Help from "./containers/Help";
-import Charts from "./containers/Charts";
 import Footer from "./utils/Footer";
 import connect from "react-redux/es/connect/connect";
+import Header from "./utils/Header";
 
 class App extends Component {
 
@@ -25,19 +25,25 @@ class App extends Component {
     return (
 
       <Router>
-        <div className="flex flex-col">
+        <div className="w-full">
+          <div className="flex justify-center">
+            <div className="w-full">
 
-          {/* Home route */}
-          <Route exact path="/" component={Home} />
+              <Header/>
 
-          {/* Charts route */}
-          <Route path="/charts" component={Charts} />
+              {/* Home route */}
+              <Route exact path="/" component={Home} />
 
-          {/* Help route */}
-          <Route path="/help" component={Help} />
+              {/* Help route */}
+              <Route path="/help" component={Help} />
 
-          {/* Fixed footer with spacing*/}
-          <Footer className="pt-10"/>
+              {/* Fixed footer */}
+              <div className="pt-16">
+                <Footer/>
+              </div>
+
+            </div>
+          </div>
         </div>
       </Router>
     );
