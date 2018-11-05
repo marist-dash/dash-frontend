@@ -1,20 +1,15 @@
 import React, {Component} from 'react';
 import connect from "react-redux/es/connect/connect";
-import InitialsCircle from "./InitialsCircle";
-import LogoutButton from "./LogoutButton";
-import {FaFileAlt, FaChalkboardTeacher} from "react-icons/fa";
 
 class Profile extends Component {
 
   render() {
     return (
-      <div className="profile h-full pt-4 border-indigo-light border-l-4 shadow-lg text-grey-darkest bg-white">
+      <div className="w-full dash-base-width p-4 m-4 border-indigo-light border-t-4 shadow-lg rounded-b-lg text-grey-darkest bg-white">
 
-        <div className="flex justify-center">
-          <InitialsCircle className="flex"/>
-        </div>
 
-        <p className="pt-3 font-bold text-center text-xl">{this.props.student.firstName} {this.props.student.lastName}</p>
+
+        <p className="font-bold text-center text-xl">{this.props.student.firstName} {this.props.student.lastName}</p>
         <p className="pt-1 text-center text-grey-dark">
           {
             this.props.student.isUndergraduate &&
@@ -88,65 +83,9 @@ class Profile extends Component {
           }
         </div>
 
-        {/* Helpful links */}
-        <div className="flex flex-col py-12">
-          <p className="pb-2 text-lg text-center text-grey-dark">Helpful Links</p>
-          <div className="flex justify-center pb-4">
-            <DegreeWorksButton />
-          </div>
-          <div className="flex justify-center pb-4">
-            <ILearnButton />
-          </div>
-          <div className="flex justify-center">
-            <LogoutButton/>
-          </div>
-        </div>
-
       </div>
     );
   }
-}
-
-const DegreeWorksButton = () => {
-  const degreeWorksLink = "https://degreeworks.banner.marist.edu/dashboard/dashboard";
-  return (
-    <div>
-      <a href={degreeWorksLink} target={"_blank"}>
-        <button
-          className="rounded shadow-md border border-indigo-light bg-grey-lightest text-indigo hover:bg-indigo-light hover:text-grey-lightest">
-          <div className="flex">
-            <div className="flex-1 py-2 px-2">
-              DegreeWorks
-            </div>
-            <div className="flex-1 py-2 pr-2">
-              <FaFileAlt/>
-            </div>
-          </div>
-        </button>
-      </a>
-    </div>
-  );
-};
-
-const ILearnButton = () => {
-  const iLearnLink = "https://ilearn.marist.edu/";
-  return (
-    <div>
-      <a href={iLearnLink} target={"_blank"}>
-        <button
-          className="rounded shadow-md border border-indigo-light bg-grey-lightest text-indigo hover:bg-indigo-light hover:text-grey-lightest">
-          <div className="flex">
-            <div className="flex-1 py-2 px-2">
-              iLearn
-            </div>
-            <div className="flex-1 py-2 pr-2">
-              <FaChalkboardTeacher/>
-            </div>
-          </div>
-        </button>
-      </a>
-    </div>
-  );
 }
 
 const mapStateToProps = (state) => ({
