@@ -2,60 +2,49 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  background-color: #DAE1E7;
+}
+
+button:focus, button:active {
+  outline: none !important;
+  box-shadow: none;
+}
+
 .icon-spin {
   -webkit-animation: icon-spin 3s infinite linear;
   animation: icon-spin 3s infinite linear;
 }
 
-@-webkit-keyframes icon-spin {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(359deg);
-    transform: rotate(359deg);
-  }
+.icon-spin {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #EF5753;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 4s linear infinite; /* Safari */
+  animation: spin 4s linear infinite;
 }
 
-@keyframes icon-spin {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(359deg);
-    transform: rotate(359deg);
-  }
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
 }
 
-.form {
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.dash-base-width {
   width: 22rem;
 }
 
-.profile {
-  width: 30rem;
-}
-
-.my-34 {
-  margin-top: 9rem;
-  margin-bottom: 9rem;
-}
-
-.mx-34 {
-  margin-left: 8.3rem;
-  margin-right: 8.3rem;
-}
-
-.my-36 {
-  margin-top: 10.9rem;
-  margin-bottom: 10.9rem;
+.pie {
+  width: 22rem;
+  height: 22rem;
 }
 
 .text-6xl {
   font-size: 4.5rem;
-}
-
-.h-50 {
-  height: 14rem;
 }

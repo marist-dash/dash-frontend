@@ -2,60 +2,69 @@ import React, {Component} from 'react';
 import connect from "react-redux/es/connect/connect";
 import Profile from "../utils/Profile";
 import Requirements from "../utils/Requirements";
-import {FaCog} from 'react-icons/fa';
-import Header from "../utils/Header";
-import Pie from "../utils/Pie";
-import RedFox from "../utils/RedFox";
+import Pies from "../utils/Pies";
 import Form from "../utils/Form";
+import Loading from "../utils/Loading";
+import HelpfulLinks from "../utils/HelpfulLinks";
 
 class Home extends Component {
 
   render() {
-
-    // show login form if user hasn't logged in
-    if (!this.props.requestSent) {
+    // if the student object is loaded
+    if (this.props.student) {
       return (
-        <div className="h-screen bg-grey-lighter">
-
-          <div className="text-center">
-            <RedFox/>
-          </div>
-
+        <div className="w-full">
           <div className="flex justify-center">
-            <Form/>
+            <div className="w-full max-w-5xl">
+              <div className="block xl:flex  xl:justify-center">
+
+                <div className="xl:w-1/3">
+                  <div className="flex justify-center">
+                    <Profile/>
+                  </div>
+                  <div className="flex justify-center">
+                    <HelpfulLinks/>
+                  </div>
+                </div>
+
+
+                {/* Pies */}
+                <div className="xl:w-1/3">
+                  <div className="flex justify-center">
+                    <Pies/>
+                  </div>
+                </div>
+
+                {/*Requirements */}
+                <div className="xl:w-1/3">
+                  <div className="flex justify-center">
+                    <Requirements/>
+                  </div>
+                </div>
+
+              </div>
+            </div>
           </div>
-
         </div>
-      );
-    }
+      )
+    } else {
+      // the form hasn't been submitted yet, so show form
+      if (!this.props.requestSent) {
+        return (
+          <div className="h-screen">
 
-    // if student response has been received, show report
-    if (!this.props.student) {
+            <div className="flex justify-center">
+              <Form/>
+            </div>
+
+          </div>
+        );
+      }
+      // if no student object but form submitted, show loading screen
       return (
-        <p className="text-center icon-spin text-5xl">
-          <FaCog/>
-        </p>
+        <Loading/>
       );
     }
-
-    return (
-      <div className="w-full h-screen bg-grey-lighter">
-
-        {/* Header */}
-        <Header/>
-
-        <div className="flex justify-center">
-          {/* Profile */}
-          <Profile/>
-
-          {/* Pie */}
-          <Pie/>
-
-          {/*Requirements */}
-          <Requirements/>
-        </div>
-      </div>
-    );
   }
 }
 

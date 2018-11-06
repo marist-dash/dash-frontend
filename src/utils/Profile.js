@@ -1,17 +1,15 @@
 import React, {Component} from 'react';
 import connect from "react-redux/es/connect/connect";
-import InitialsCircle from "./InitialsCircle";
 
 class Profile extends Component {
+
   render() {
     return (
-      <div className="profile h-full p-4 m-8 pt-2 border-t-4 border-indigo-light rounded-b-lg shadow-lg text-grey-darkest bg-white">
+      <div className="w-full dash-base-width p-4 m-4 border-indigo-light border-t-4 shadow-lg rounded-b-lg text-grey-darkest bg-white">
 
-        <div className="flex justify-center">
-          <InitialsCircle className="flex"/>
-        </div>
 
-        <p className="pt-3 font-bold text-center text-xl">{this.props.student.firstName} {this.props.student.lastName}</p>
+
+        <p className="font-bold text-center text-xl">{this.props.student.firstName} {this.props.student.lastName}</p>
         <p className="pt-1 text-center text-grey-dark">
           {
             this.props.student.isUndergraduate &&
@@ -22,43 +20,73 @@ class Profile extends Component {
         <div className="flex flex-col pt-5 text-lg">
 
           {/* School */}
-          <div className="flex pb-4">
-            <div className="font-bold w-10">School</div>
-            <div className="pl-8">{this.props.student.school}</div>
+          <div className="flex pb-6">
+            <div className="w-2/5 pr-4 font-bold text-right">School</div>
+            <div className="w-3/5">{this.props.student.school}</div>
           </div>
 
 
           {/* GPA */}
-          <div className="flex pb-4">
-            <div className="w-10 font-bold">GPA</div>
-            <div className="pl-8">{this.props.student.GPA}</div>
+          <div className="flex pb-6">
+            <div className="w-2/5 pr-4 font-bold text-right">GPA</div>
+            <div className="w-3/5">{this.props.student.GPA}</div>
           </div>
 
-          {/* Majors and minors */}
-          <Studies studies={this.props.student.majors} type={"Major"}/>
-          <Studies studies={this.props.student.minors} type={"Minor"}/>
+          {/* Advisor(s) */}
+          <div className="flex pb-4">
+            <div className="w-2/5 pr-4 font-bold text-right">
+              {this.props.student.advisors.length > 1 ? (
+                <span>Advisors</span>
+              ) : (
+                <span>Advisor</span>
+              )}
+            </div>
+            <div className="w-3/5 flex flex-col">
+              {this.props.student.advisors.map( (advisor, index) =>
+                <div key={index} className="pb-2">{advisor.firstName} {advisor.lastName}</div>
+              )}
+            </div>
+          </div>
 
+          {/* Major(s) */}
+          <div className="flex pb-4">
+            <div className="w-2/5 pr-4 font-bold text-right">
+              {this.props.student.majors.length > 1 ? (
+                <span>Majors</span>
+              ) : (
+                <span>Major</span>
+              )}
+            </div>
+            <div className="w-3/5 flex flex-col">
+              {this.props.student.majors.map( (major, index) =>
+                <div key={index} className="pb-2">{major.name}</div>
+              )}
+            </div>
+          </div>
+
+          {/* Minor(s) */}
+          {this.props.student.minors.length > 0 &&
+          <div className="flex pb-4">
+            <div className="w-2/5 pr-4 font-bold text-right">
+              {this.props.student.minors.length > 1 ? (
+                <span>Minors</span>
+              ) : (
+                <span>Minor</span>
+              )}
+            </div>
+            <div className="w-3/5 flex flex-col">
+              {this.props.student.minors.map((minor, index) =>
+                <div key={index} className="pb-2">{minor.name}</div>
+              )}
+            </div>
+          </div>
+          }
         </div>
+
       </div>
     );
   }
 }
-
-// Represents a major or minor
-const Studies = (props) => {
-  return (
-    <div className="font-bold pb-4">
-      {props.studies.length > 1 ? (
-        <span>{props.type}s</span>
-      ) : (
-        <span>{props.type}</span>
-      )}
-      {
-        props.studies.map((study, index) => <p key={index} className="pt-1 pl-4 font-normal">{study.name}</p>)
-      }
-    </div>
-  );
-};
 
 const mapStateToProps = (state) => ({
   student: state.student
