@@ -80,30 +80,11 @@ class Form extends Component {
         this.parseDegreeWorksText(response.data);
       })
       .catch((error) => {
-
-        // cancel request and reset password
-        this.props.dispatch({
-          type: "REQUEST_SENT",
-          value: false
-        });
-        this.props.dispatch({
-          type: "PASSWORD",
-          password: ''
-        });
-
-        // check HTTP response to display best message
         if (error.response.status === 401) {
-          this.props.dispatch({
-            type: "ERROR_MESSAGE",
-            errorMessage: "Incorrect username and/or password"
-          });
+          this.handleBackendError("Incorrect username and/or password");
         } else {
-          this.props.dispatch({
-            type: "ERROR_MESSAGE",
-            errorMessage: "Unable to fetch DegreeWorks report"
-          });
+          this.handleBackendError("Unable to fetch your DegreeWorks report.");
         }
-
       });
   };
 
@@ -124,15 +105,35 @@ class Form extends Component {
           student: response.data
         });
       })
-      .catch(function (response) {
-        //handle error
-        console.log(response);
+      .catch( (error) => {
+        // most likely a 500
+        this.handleBackendError("There was a problem parsing your DegreeWorks data. We hope to resolve this issue soon.");
       });
+  };
+
+  handleBackendError = (errorMessage) => {
+    // tell redux no request is in motion
+    this.props.dispatch({
+      type: "REQUEST_SENT",
+      value: false
+    });
+
+    // reset password in redux store
+    this.props.dispatch({
+      type: "PASSWORD",
+      password: ''
+    });
+
+    // update error message in redux store
+    this.props.dispatch({
+      type: "ERROR_MESSAGE",
+      errorMessage: errorMessage
+    });
   };
 
   render() {
     return (
-      <div className="form p-4">
+      <div className="w-full dash-base-width p-4">
         <form className="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4">
 
           {/* Username */}
@@ -186,11 +187,11 @@ class Form extends Component {
 
           {/* Authorization checkbox */}
           <div className="mb-4">
-              <input
-                name="isAuthorized"
-                value={this.state.isAuthorized}
-                onChange={this.handleChange}
-                className="mr-2 leading-tight" type="checkbox" checked={this.state.isAuthorized}/>
+            <input
+              name="isAuthorized"
+              value={this.state.isAuthorized}
+              onChange={this.handleChange}
+              className="mr-2 leading-tight" type="checkbox" checked={this.state.isAuthorized}/>
             <span className="text-grey-darker font-bold text-sm"> Allow access to DegreeWorks
               {this.state.isAuthorized ? (
                 <span className="ml-1 text-green-dark"><FaCheckCircle/></span>
