@@ -7,11 +7,9 @@ class Header extends Component {
     return (
       <div className="w-full pb-4">
         <div className="flex justify-center">
-          <div className="w-full max-w-5xl pb-4">
+          <div className="w-full max-w-5xl">
             <div className="flex justify-center">
-              <div>
-                <Link to="/"><img src="DashSizedFinal.png" alt="Dash" className="h-24 mt-8 pb-2 hover:border-grey-darkest border-b-2"/></Link>
-              </div>
+              <Link to="/"><img src="DashSizedFinal.png" alt="Dash" className="h-16 sm:h-24 mt-4 hover:border-grey-darkest border-b-2"/></Link>
             </div>
           </div>
         </div>

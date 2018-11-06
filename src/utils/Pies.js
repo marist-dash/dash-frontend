@@ -33,36 +33,49 @@ class Pies extends React.Component {
     });
 
     // push majors to pie array
-    props.student.majors.filter( major => degreeWorksPies.push({
-      name: major.name,
-      type: "Major",
-      credits: [
-        {
-          name: 'Credits Applied',
-          value: major.creditsApplied
-        },
-        {
-          name: 'Credits Missing',
-          value: major.creditsRequired - major.creditsApplied
-        }
-      ]
-    }));
+    props.student.majors.forEach( major => {
+
+      // add check for when student has more credits than required
+      if (major.creditsRequired <= major.creditsApplied) {
+        major.creditsApplied = major.creditsRequired;
+      }
+      degreeWorksPies.push({
+        name: major.name,
+        type: "Major",
+        credits: [
+          {
+            name: 'Credits Applied',
+            value: major.creditsApplied
+          },
+          {
+            name: 'Credits Missing',
+            value: major.creditsRequired - major.creditsApplied
+          }
+        ]
+      })
+    });
 
     // push minors to pie array
-    props.student.minors.filter( minor => degreeWorksPies.push({
-      name: minor.name,
-      type: "Minor",
-      credits: [
-        {
-          name: 'Credits Applied',
-          value: minor.creditsApplied
-        },
-        {
-          name: 'Credits Missing',
-          value: minor.creditsRequired - minor.creditsApplied
-        }
-      ]
-    }));
+    props.student.minors.forEach( minor => {
+      // add check for when student has more credits than required
+      if (minor.creditsRequired <= minor.creditsApplied) {
+        minor.creditsApplied = minor.creditsRequired;
+      }
+      degreeWorksPies.push({
+        name: minor.name,
+        type: "Minor",
+        credits: [
+          {
+            name: 'Credits Applied',
+            value: minor.creditsApplied
+          },
+          {
+            name: 'Credits Missing',
+            value: minor.creditsRequired - minor.creditsApplied
+          }
+        ]
+      })
+    });
 
     this.state = {
       degreeProgress: degreeProgress,
@@ -105,26 +118,31 @@ class Pies extends React.Component {
 
 
         {/* Arrows */}
-        <div className="flex justify-between mx-4 pb-0 text-4xl text-grey-darkest">
-          <FaArrowLeft onClick={ () => this.changePie(false)} className="hover:text-red-light"/>
-          <FaArrowRight onClick={ () => this.changePie(true)} className="hover:text-indigo"/>
+        <div className="flex text-4xl bg-grey-light rounded-lg text-center">
+          <button className="w-1/2 pt-1 text-grey-darkest hover:text-red-light hover:bg-grey rounded-l-lg border-r-2 border-grey"
+                  onClick={() => this.changePie(false)}>
+            <FaArrowLeft/>
+          </button>
+          <button className="w-1/2 pt-1 text-grey-darkest hover:text-indigo hover:bg-grey rounded-r-lg"
+                  onClick={ () => this.changePie(true)}>
+            <FaArrowRight/>
+          </button>
         </div>
 
         {/* The Pie */}
         <div className="flex justify-center">
-
           {/* % in middle */ }
           <div className="absolute my-24 text-grey-darkest bg-transparent">
-            <div className="flex justify-center text-6xl pt-12 pl-4">
+            <div className="flex justify-center text-6xl pt-6 pl-4">
               <div className="">{Math.floor(pies[index].credits[0].value / (pies[index].credits[0].value + pies[index].credits[1].value) * 100)}</div>
               <div className="text-3xl mt-2">%</div>
             </div>
           </div>
 
 
-          <div className="pie">
+          <div className="flex" style={{width: '100%', height: '20rem'}}>
             <ResponsiveContainer height="100%" width="100%">
-              <PieChart>
+              <PieChart margin={{top: -25, right: -30, left: -30, bottom: -25}} >
                 <Pie
                   dataKey="value"
                   data={this.state.degreeWorksPies[this.state.currentPieIndex].credits}
@@ -140,8 +158,6 @@ class Pies extends React.Component {
               </PieChart>
             </ResponsiveContainer>
           </div>
-
-
         </div>
 
         {/* legend */}

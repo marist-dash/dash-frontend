@@ -10,6 +10,7 @@ import HelpfulLinks from "../utils/HelpfulLinks";
 class Home extends Component {
 
   render() {
+    // if the student object is loaded
     if (this.props.student) {
       return (
         <div className="w-full">
@@ -47,6 +48,7 @@ class Home extends Component {
         </div>
       )
     } else {
+      // the form hasn't been submitted yet, so show form
       if (!this.props.requestSent) {
         return (
           <div className="h-screen">
@@ -58,6 +60,7 @@ class Home extends Component {
           </div>
         );
       }
+      // if no student object but form submitted, show loading screen
       return (
         <Loading/>
       );
