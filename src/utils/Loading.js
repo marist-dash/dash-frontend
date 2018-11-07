@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import connect from "react-redux/es/connect/connect";
 import axios from 'axios';
-import {FaForward} from "react-icons/fa";
+import {FaAngleRight} from "react-icons/fa";
 
 const mediaEndpoint = "https://random.dog/woof.json";
 
@@ -9,10 +9,12 @@ class Loading extends Component {
 
   constructor() {
     super();
+    const isMobile = window.innerWidth <= 800 && window.innerHeight <= 600;
     this.state = {
       mediaUrl: '',
-      isImage: true
-    }
+      isImage: true,
+      isMobile: isMobile
+    };
   }
 
   componentDidMount() {
@@ -22,15 +24,24 @@ class Loading extends Component {
   fetchMediaItem = () => {
     axios.get(mediaEndpoint)
       .then( (response) => {
-        this.setState({ mediaUrl: response.data.url });
-        const fileExtension = this.state.mediaUrl
-          .substring(this.state.mediaUrl.length - 3, this.state.mediaUrl.length)
-          .toLowerCase();
-        if (fileExtension === 'jpg' || fileExtension === 'png' || fileExtension === 'gif') {
-          this.setState({ isImage: true });
-        } else {
-          this.setState({ isImage: false });
-        }
+        this.setState({ mediaUrl: response.data.url }, () => {
+          // get file type
+          const fileExtension = this.state.mediaUrl
+            .substring(this.state.mediaUrl.length - 3, this.state.mediaUrl.length)
+            .toLowerCase();
+
+          // check for image or video
+          if (fileExtension === 'jpg' || fileExtension === 'png') {
+            this.setState({ isImage: true });
+          } else {
+            if (this.state.isMobile) {
+              // don't show videos on mobile (including gifs)
+              this.fetchMediaItem();
+            } else {
+              this.setState({ isImage: false });
+            }
+          }
+        });
       }).catch( (response) => {
     });
   };
@@ -38,38 +49,35 @@ class Loading extends Component {
   render() {
 
     const mediaStyles = {
-      display: 'block',
-      maxWidth: '30rem',
-      maxHeight: '30rem',
+      objectFit: 'cover',
       width: 'auto',
-      height: 'auto',
     };
+    mediaStyles.height = this.state.isMobile ? '20rem' : '30rem'
 
     return (
       <div>
-        <div className="flex justify-center  py-8 text-5xl text-indigo">
-          <FaForward onClick={ () => this.fetchMediaItem()} className="hover:text-indigo-dark"/>
-        </div>
-        <div className="flex justify-center pb-8">
+
+        <div className="flex justify-center mx-2 rounded-lg">
           {
             this.state.isImage ? (
-              <img src={this.state.mediaUrl} style={mediaStyles} className="rounded-lg shadow-lg" alt="doggo"/>
+              <img style={mediaStyles} src={this.state.mediaUrl} className="rounded-lg shadow-lg" alt="doggo"/>
             ) : (
               <video style={mediaStyles} controls autoPlay className="rounded-lg shadow-lg" >
                 <source src={this.state.mediaUrl} type="video/mp4"/>
               </video>
             )
           }
-
+        </div>
+        <div className="flex justify-center pt-4 pb-8">
+          <button className="pl-3 text-5xl text-indigo-light bg-grey-lighter rounded-lg hover:text-indigo"
+                  onClick={ () => this.fetchMediaItem()}>
+            <div className="flex items-center"> <p>next</p> <FaAngleRight /> </div>
+          </button>
         </div>
 
         <div className="flex justify-center">
-          <p className="text-center icon-spin"/>
+          <p className="h-4 text-center icon-spin"/>
         </div>
-
-
-        <p className="text-center text-grey-darkest text-4xl">Loading your DegreeWorks report</p>
-
 
       </div>
     );

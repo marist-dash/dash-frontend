@@ -45,7 +45,6 @@ class Help extends Component {
     }
     return (
       <div>
-
         {/* Help Items */}
         <div className="flex justify-center p-4">
           <div className="flex flex-col max-w-lg p-2 bg-white rounded-lg shadow-lg">

@@ -6,6 +6,11 @@ html {
   background-color: #DAE1E7;
 }
 
+button:focus, button:active {
+  outline: none !important;
+  box-shadow: none;
+}
+
 .icon-spin {
   -webkit-animation: icon-spin 3s infinite linear;
   animation: icon-spin 3s infinite linear;
@@ -14,7 +19,7 @@ html {
 .icon-spin {
   border: 16px solid #f3f3f3;
   border-radius: 50%;
-  border-top: 16px solid #6574CD;
+  border-top: 16px solid #EF5753;
   width: 120px;
   height: 120px;
   -webkit-animation: spin 4s linear infinite; /* Safari */
@@ -31,42 +36,15 @@ html {
   100% { transform: rotate(360deg); }
 }
 
-.form {
-  width: 22rem;
-}
-
-.profile {
-  width: 22rem;
-}
-
-.requirements {
+.dash-base-width {
   width: 22rem;
 }
 
 .pie {
-  width: 25rem;
-  height: 25rem;
-}
-
-.my-34 {
-  margin-top: 9rem;
-  margin-bottom: 9rem;
-}
-
-.mx-34 {
-  margin-left: 8.3rem;
-  margin-right: 8.3rem;
-}
-
-.my-36 {
-  margin-top: 10.9rem;
-  margin-bottom: 10.9rem;
+  width: 22rem;
+  height: 22rem;
 }
 
 .text-6xl {
   font-size: 4.5rem;
-}
-
-.h-50 {
-  height: 14rem;
 }

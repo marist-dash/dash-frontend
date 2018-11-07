@@ -1,7 +1,7 @@
 version: '3'
 services:
   frontend:
-    image: tgalske/dash-frontend:0.1
+    image: tgalske/dash-frontend
     restart: always    
     networks:
       - dash-net
