@@ -1,4 +1,7 @@
-import React, {Component} from 'react';
+//Displays the Requirements checklist
+
+//Import Statements
+import React, { Component } from 'react';
 import {FaRegCheckCircle, FaTimesCircle} from "react-icons/fa";
 import connect from "react-redux/es/connect/connect";
 
@@ -8,6 +11,7 @@ class Requirements extends Component {
     // create local requirements variable from Redux student object
     const requirements = this.props.student.requirements;
 
+    // Use the local requirements variable to display each of the requirements and whether or not it is completed
     return (
       <div className="w-full dash-base-width p-4 m-4 border-t-4 border-indigo-light rounded-b-lg shadow-lg bg-white">
         <p className="text-center font-bold text-lg text-grey-darkest">Requirements</p>
@@ -27,6 +31,7 @@ class Requirements extends Component {
   }
 }
 
+//Set the properties for what the requirement looks like
 const Requirement = (props) => {
   if (props.status === "NA") {
     return null;
@@ -51,6 +56,7 @@ const Requirement = (props) => {
   }
 };
 
+// Connects to the Redux in order to access the student object
 const mapStateToProps = (state) => ({
   student: state.student
 });

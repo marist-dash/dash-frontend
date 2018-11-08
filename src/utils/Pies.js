@@ -1,8 +1,12 @@
+//Sets the properties for the pie charts on the home page
+
+//Import Statements
 import React from "react";
 import {PieChart, Pie, Cell, Tooltip, ResponsiveContainer} from "recharts";
 import connect from "react-redux/es/connect/connect";
 import {FaCircle, FaArrowRight, FaArrowLeft} from "react-icons/fa";
 
+//The colors for the pie chart
 const colors = ["#5661B3", "#E3342F"];
 
 class Pies extends React.Component {
@@ -10,13 +14,14 @@ class Pies extends React.Component {
     super();
 
     const degreeProgress = props.student.degreeProgress;
-    // credits applied cannot be more than credits required
+    // ReChart can't show anything over than 100%, so if the user has more than 120 credits, then it just shows 100%
     if (degreeProgress.creditsRequired <= degreeProgress.creditsApplied) {
       degreeProgress.creditsApplied = degreeProgress.creditsRequired;
     }
-
+    //Sets up an array that will contain all of the pie charts
     var degreeWorksPies = [];
 
+    //Sets the properties for the main chart that shows up, which is just total credits
     degreeWorksPies.push({
       name: "Total Credits",
       type: null,
@@ -77,6 +82,7 @@ class Pies extends React.Component {
       })
     });
 
+    //Maps the information from the student object to local variables
     this.state = {
       degreeProgress: degreeProgress,
       degreeWorksPies: degreeWorksPies,
@@ -84,17 +90,21 @@ class Pies extends React.Component {
     };
   }
 
+  //Scrolls between the different pie charts
   changePie = (goForward) => {
     const index = this.state.currentPieIndex;
     const pies = this.state.degreeWorksPies;
 
+    //If the forward button is pressed
     if (goForward) {
       if (index === pies.length - 1) {
         this.setState({ currentPieIndex: 0});
       } else {
         this.setState({ currentPieIndex: 1 + this.state.currentPieIndex });
       }
-    } else {
+    }
+    //If the back button is pressed
+    else {
       if (index === 0) {
         this.setState({ currentPieIndex: this.state.degreeWorksPies.length - 1});
       } else {
@@ -139,7 +149,7 @@ class Pies extends React.Component {
             </div>
           </div>
 
-
+          {/*Sets the properties for the size of the pie chart and the tooltips when you hover over a section*/}
           <div className="flex" style={{width: '100%', height: '20rem'}}>
             <ResponsiveContainer height="100%" width="100%">
               <PieChart margin={{top: -25, right: -30, left: -30, bottom: -25}} >
@@ -177,6 +187,7 @@ class Pies extends React.Component {
   }
 }
 
+// Connects to the Redux in order to access the student object
 const mapStateToProps = (state) => ({
   student: state.student
 });
