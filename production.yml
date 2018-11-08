@@ -10,7 +10,7 @@ services:
     labels:
       - "traefik.backend=dash-frontend"
       - "traefik.docker.network=dash-net"
-      - "traefik.frontend.rule=Host:www.dev-maristdash.tk"
+      - "traefik.frontend.rule=Host:dev-maristdash.tk, www.dev-maristdash.tk"
       - "traefik.enable=true"
       - "traefik.port=80"
 networks:
