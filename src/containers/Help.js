@@ -37,19 +37,12 @@ class Help extends Component {
     this.setState({ helpText: helpText});
   };
 
-  // to do
-  // .teamSelector { cursor: pointer; }
-  helpItemStyle = {
-
-  };
-
   render() {
     const htmlToReactParser = new HtmlToReactParser();
     if (this.state.helpText.length > 0) {
       return (
         <div>
-          {/* Help Items */}
-          <div className="flex justify-center p-4">
+          <div className="flex justify-center p-4 mb-4">
             <div className="flex flex-col max-w-md p-2 bg-white rounded-lg shadow-lg">
 
               {/* FAQ title */}
@@ -59,11 +52,10 @@ class Help extends Component {
               {
                 this.state.helpText.map( (helpItem, index) => {
                   return (
-                    <div className="border-grey-light border-b-2">
+                    <div key={index} className="border-b-2 border-grey py-2 mb-2">
 
                       <div
-                        key={index}
-                        className="flex justify-between m-2 p-2 text-grey-darkest text-2xl text-left"
+                        className="flex justify-between m-2 p-2 hoverableDiv text-grey-darkest text-2xl text-left"
                         onClick={() => this.toggleShowProps(index)}>
                         {/* Title */}
                         <div> {helpItem.title} </div>

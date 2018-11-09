@@ -51,7 +51,7 @@ class Home extends Component {
       // the form hasn't been submitted yet, so show form
       if (!this.props.requestSent) {
         return (
-          <div className="h-screen">
+          <div>
 
             <div className="flex justify-center">
               <Form/>

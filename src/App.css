@@ -48,3 +48,7 @@ button:focus, button:active {
 .text-6xl {
   font-size: 4.5rem;
 }
+
+.hoverableDiv {
+  cursor: pointer;
+}
