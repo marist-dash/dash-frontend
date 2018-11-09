@@ -6,11 +6,11 @@ services:
     networks:
       - dash-net
     ports:
-      - 3000:80
+      - "3000:80"
     labels:
       - "traefik.backend=dash-frontend"
       - "traefik.docker.network=dash-net"
-      - "traefik.frontend.rule=Host:www.maristdash.tk"
+      - "traefik.frontend.rule=Host:dev-maristdash.tk, www.dev-maristdash.tk"
       - "traefik.enable=true"
       - "traefik.port=80"
 networks:
