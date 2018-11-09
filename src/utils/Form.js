@@ -1,8 +1,12 @@
-import React, {Component} from 'react';
+//This is the login form that the user sees before they connect
+
+//Import Statements
+import React, { Component } from 'react';
 import { withRouter} from 'react-router-dom'
 import {connect} from "react-redux";
 import {FaFileExport, FaCheckCircle, FaTimesCircle} from "react-icons/fa";
 
+//Connection to the automation and parsing service
 const axios = require('axios');
 
 class Form extends Component {
@@ -42,6 +46,7 @@ class Form extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
 
+    // error message if the user leaves fields blank
     if (this.props.username.length < this.state.requiredUsernameLength ||
       this.props.password.length < this.state.requiredPasswordLength ||
       !this.state.isAuthorized) {
@@ -52,6 +57,7 @@ class Form extends Component {
       return;
     }
 
+    //Opens up the loading screen while the data is fetched and parsed
     this.getDegreeWorksText();
     this.props.dispatch({
       type: "REQUEST_SENT",
@@ -59,6 +65,7 @@ class Form extends Component {
     });
   };
 
+  //Calls axios to get the degreeWorks text through browser automation using the users credentials
   getDegreeWorksText = () => {
     const formData = new FormData();
     formData.set('username', this.props.username);
@@ -77,6 +84,7 @@ class Form extends Component {
       .then((response) => {
         this.parseDegreeWorksText(response.data);
       })
+      //Checks to see if there was an error logging into degreeWorks and getting the text
       .catch((error) => {
         if (error.response.status === 401) {
           this.handleBackendError("Incorrect username and/or password");
@@ -86,6 +94,7 @@ class Form extends Component {
       });
   };
 
+  //Calls axios to parse the text obtained from degreeWorks in order to figure out student information
   parseDegreeWorksText = (degreeWorksText) => {
     const formData = new FormData();
     formData.set('degreeWorksText', degreeWorksText);
@@ -108,7 +117,7 @@ class Form extends Component {
         this.handleBackendError("There was a problem parsing your DegreeWorks data. We hope to resolve this issue soon.");
       });
   };
-
+  // If there's an error at any point, display a message
   handleBackendError = (errorMessage) => {
     // tell redux no request is in motion
     this.props.dispatch({
@@ -238,6 +247,7 @@ class Form extends Component {
   }
 }
 
+// Connects to the Redux and sets the user's credentials
 const mapStateToProps = (state) => ({
   username: state.username,
   password: state.password,

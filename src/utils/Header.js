@@ -1,8 +1,12 @@
-import React, {Component} from 'react';
+//Sets the properties for the header
+
+//Import Statements
+import React, { Component } from 'react';
 import connect from "react-redux/es/connect/connect";
 import {Link} from "react-router-dom";
 import InitialsCircle from "./InitialsCircle";
 
+//Displays the header, which is just the Dash logo right now
 class Header extends Component {
   render() {
     return (
@@ -33,6 +37,7 @@ class Header extends Component {
   }
 }
 
+// Connects to the Redux in order to access the student object
 const mapStateToProps = (state) => ({
   student: state.student
 });
