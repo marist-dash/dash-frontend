@@ -41,10 +41,16 @@ function reducer(state = initialState, action) {
         student: action.student
       });
 
-    case "EXTERNAL_CONFIGS":
+    case "ENDPOINTS":
       return Object.assign({}, state, {
-        externalConfigs: action.externalConfigs
+        endpoints: action.endpoints
       });
+
+    case "HELP_TEXT":
+      return Object.assign({}, state, {
+        helpText: action.helpText
+      });
+
     default:
       return state;
   }

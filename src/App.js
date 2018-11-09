@@ -30,8 +30,15 @@ class App extends Component {
     axios.get(process.env.REACT_APP_EXTERNAL_CONFIGS_URL)
       .then( response => {
         this.props.dispatch({
-          type: 'EXTERNAL_CONFIGS',
-          externalConfigs: response.data
+          type: 'ENDPOINTS',
+          endpoints: {
+            dash_browser_automation: response.data.dash_browser_automation_endpoint,
+            dash_parse: response.data.dash_parse_endpoint
+          }
+        });
+        this.props.dispatch({
+          type: 'HELP_TEXT',
+          helpText: response.data.help_text
         });
       })
       .catch( error => {

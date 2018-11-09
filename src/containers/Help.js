@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {FaAngleDown, FaAngleUp} from "react-icons/fa";
 import connect from "react-redux/es/connect/connect";
+const HtmlToReactParser = require('html-to-react').Parser;
 
 class Help extends Component {
 
@@ -12,10 +13,18 @@ class Help extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.externalConfigs !== prevProps.externalConfigs) {
+    if (this.props.helpText !== this.state.helpText) {
       this.setState({
-        helpText: this.props.externalConfigs.helpText
+        helpText: this.props.helpText
       });
+    }
+  }
+
+  componentDidMount() {
+    if (this.props.helpText) {
+      this.setState({
+        helpText: this.props.helpText
+      })
     }
   }
 
@@ -23,50 +32,66 @@ class Help extends Component {
     // copy array
     const helpText = this.state.helpText;
     // toggle showText
-    helpText[index].showText = !helpText[index].showText
+    helpText[index].showText = !helpText[index].showText;
     // replace state array with the updated array
     this.setState({ helpText: helpText});
   };
 
+  // to do
+  // .teamSelector { cursor: pointer; }
+  helpItemStyle = {
+
+  };
+
   render() {
+    const htmlToReactParser = new HtmlToReactParser();
     if (this.state.helpText.length > 0) {
       return (
         <div>
           {/* Help Items */}
           <div className="flex justify-center p-4">
-            <div className="flex flex-col max-w-lg p-2 bg-white rounded-lg shadow-lg">
+            <div className="flex flex-col max-w-md p-2 bg-white rounded-lg shadow-lg">
+
+              {/* FAQ title */}
               <p className="p-2 m-2 text-center text-3xl text-grey-darkest font-bold">Common questions about Dash</p>
+
+              {/* Map through help items */}
               {
                 this.state.helpText.map( (helpItem, index) => {
                   return (
-                    <button
-                      onClick={() => this.toggleShowProps(index)}
-                      key={index}
-                      className="max-w-md m-2 p-2 rounded-lg text-grey-darkest bg-grey-light text-2xl text-left hover:bg-grey-lighter hover:border-grey border-2">
+                    <div className="border-grey-light border-b-2">
 
-                      {/* Title and drop-down caret */}
                       <div
-                        className="flex justify-between">
-                        <div>{helpItem.title}</div>
-                        {
-                          helpItem.showText ? (
-                            <div className="text-red-light"><FaAngleUp/></div>
-                          ) : (
-                            <div className="text-indigo"><FaAngleDown/></div>
-                          )
-                        }
+                        key={index}
+                        className="flex justify-between m-2 p-2 text-grey-darkest text-2xl text-left"
+                        onClick={() => this.toggleShowProps(index)}>
+                        {/* Title */}
+                        <div> {helpItem.title} </div>
 
+                        {/* Drop down/up caret */}
+                        <div>
+                          {
+                            helpItem.showText ? (
+                              <div className="flex-1 text-red-light hover:text-grey-darkest">
+                                <FaAngleUp/>
+                              </div>
+                            ) : (
+                              <div className="flex-1 text-indigo hover:text-grey-darkest">
+                                <FaAngleDown/>
+                              </div>
+                            )
+                          }
+                        </div>
                       </div>
 
                       {/* Text of help item */}
-                      <div className="pt-2">
+                      <div className="">
                         {
                           helpItem.showText &&
-                          <p className="p-2 m-2 text-base lg:text-lg bg-white rounded-lg leading-loose border-2">{helpItem.text}</p>
+                          <p className="m-2 text-grey-darkest text-base lg:text-lg bg-white leading-loose">{htmlToReactParser.parse(helpItem.text)}</p>
                         }
                       </div>
-
-                    </button>
+                    </div>
                   );
                 })
               }
@@ -86,7 +111,7 @@ class Help extends Component {
 
 
 const mapStateToProps = (state) => ({
-  externalConfigs: state.externalConfigs,
+  helpText: state.helpText,
 });
 
 export default connect(mapStateToProps) (Help);
