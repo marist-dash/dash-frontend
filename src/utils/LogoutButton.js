@@ -1,3 +1,6 @@
+//Sets the properties for the logout button
+
+//Import Statements
 import React from 'react';
 import { FaSignOutAlt } from "react-icons/fa";
 
@@ -18,6 +21,7 @@ const LogoutButton = () => (
   </div>
 );
 
+//Removes the user's information from local storage (which is kept there so they don't have to login from the same computer every time) and reloads the page
 function doLogout() {
   localStorage.clear();
   window.location.reload();

@@ -24,3 +24,9 @@ Since this branch has multiple contributors, everyime you start working:
 2) Checkout the **develop** branch to get updates from other contributors with `git checkout develop && git pull` OR `git checkout develop; git pull`
     
 3) Checkout your individual branch again (`git checkout Johnson`) and pull updates from **develop** into your branch with `git merge develop`
+
+# External Configs
+
+Endpoints for the dash-browser-automation and dash-parse services are fetched from an external JSON file on AWS
+
+[https://s3.amazonaws.com/marist-dash/configs.dash-frontend.json](https://s3.amazonaws.com/marist-dash/configs.dash-frontend.json)

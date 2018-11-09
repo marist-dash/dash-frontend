@@ -41,6 +41,16 @@ function reducer(state = initialState, action) {
         student: action.student
       });
 
+    case "ENDPOINTS":
+      return Object.assign({}, state, {
+        endpoints: action.endpoints
+      });
+
+    case "HELP_TEXT":
+      return Object.assign({}, state, {
+        helpText: action.helpText
+      });
+
     default:
       return state;
   }
