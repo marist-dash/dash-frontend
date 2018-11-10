@@ -39,7 +39,7 @@ class Help extends Component {
 
   render() {
     const htmlToReactParser = new HtmlToReactParser();
-    if (this.state.helpText.length > 0) {
+    if (this.state.helpText) {
       return (
         <div>
           <div className="flex justify-center p-4 mb-4">

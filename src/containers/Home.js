@@ -11,6 +11,8 @@ class Home extends Component {
 
   render() {
     // if the student object is loaded
+    // xl:relative xl:flex xl:justify-start xl:justify-end xl:text-right xl:justify-end xl:mt-8 xl:mr-24
+
     if (this.props.student) {
       return (
         <div className="w-full">

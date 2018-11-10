@@ -150,8 +150,8 @@ class Pies extends React.Component {
           </div>
 
           {/*Sets the properties for the size of the pie chart and the tooltips when you hover over a section*/}
-          <div className="flex" style={{width: '100%', height: '20rem'}}>
-            <ResponsiveContainer height="100%" width="100%">
+          <div className="flex justify-center" style={{width: '100%', height: '20rem'}}>
+            <ResponsiveContainer height="100%" width="90%">
               <PieChart margin={{top: -25, right: -30, left: -30, bottom: -25}} >
                 <Pie
                   dataKey="value"

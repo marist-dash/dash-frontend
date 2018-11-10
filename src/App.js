@@ -51,13 +51,12 @@ class App extends Component {
 
   render() {
     return (
-
       <Router>
         <div className="w-full">
           <div className="flex justify-center">
             <div className="w-full">
 
-              <Header/>
+              <Route component={Header}/>
 
               {/* Home route */}
               <Route exact path="/" component={Home} />

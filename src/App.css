@@ -49,6 +49,9 @@ button:focus, button:active {
   font-size: 4.5rem;
 }
 
+/* Shows a cursor on a div, like a button */
 .hoverableDiv {
   cursor: pointer;
 }
+
+.

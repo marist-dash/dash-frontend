@@ -1,13 +1,11 @@
-//Sets the properties for the header
 
-//Import Statements
 import React, { Component } from 'react';
 import connect from "react-redux/es/connect/connect";
 import {Link} from "react-router-dom";
 import InitialsCircle from "./InitialsCircle";
 
-//Displays the header, which is just the Dash logo right now
 class Header extends Component {
+
   render() {
     return (
       <div className="w-full pb-4">
@@ -24,9 +22,17 @@ class Header extends Component {
               </div>
 
               <div className="xl:w-1/3">
-                <div className="flex justify-center mt-8 ml-8 xl:justify-end xl:mr-24">
-                  <InitialsCircle/>
-                </div>
+                {
+                  this.props.location.pathname === '/help'  ? (
+                    <div className="fixed pin-t mt-1 pin-r mr-1 z-50 xl:relative xl:flex xl:mt-8 xl:-ml-4">
+                      <InitialsCircle/>
+                    </div>
+                  ) : (
+                    <div className="fixed pin-t mt-1 pin-r mr-1 z-50 xl:relative xl:flex xl:justify-start xl:justify-end xl:text-right xl:justify-end xl:mt-8 xl:mr-24">
+                      <InitialsCircle/>
+                    </div>
+                  )
+                }
               </div>
 
             </div>
@@ -37,7 +43,6 @@ class Header extends Component {
   }
 }
 
-// Connects to the Redux in order to access the student object
 const mapStateToProps = (state) => ({
   student: state.student
 });
