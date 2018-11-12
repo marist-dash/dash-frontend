@@ -1,6 +1,6 @@
 version: '3'
 services:
-  frontend:
+  dash-frontend:
     image: tgalske/dash-frontend
     restart: always    
     networks:
@@ -10,7 +10,7 @@ services:
     labels:
       - "traefik.backend=dash-frontend"
       - "traefik.docker.network=dash-net"
-      - "traefik.frontend.rule=Host:dev-maristdash.tk, www.dev-maristdash.tk"
+      - "traefik.frontend.rule=Host:speedegree.tk, www.speedegree.tk"
       - "traefik.enable=true"
       - "traefik.port=80"
 networks:
