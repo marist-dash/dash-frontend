@@ -22,16 +22,22 @@ class Loading extends Component {
   }
 
   fetchMediaItem = () => {
+
     axios.get(mediaEndpoint)
       .then( (response) => {
-        this.setState({ mediaUrl: response.data.url }, () => {
+        this.setState({ mediaUrl: response.data.url.toLowerCase() }, () => {
           // get file type
-          const fileExtension = this.state.mediaUrl
-            .substring(this.state.mediaUrl.length - 3, this.state.mediaUrl.length)
-            .toLowerCase();
-
+          var i = this.state.mediaUrl.length;
+          var fileExtension = '';
+          while (this.state.mediaUrl.charAt(i) !== '.') {
+            fileExtension = this.state.mediaUrl.charAt(i) + fileExtension;
+            i--;
+          }
           // check for image or video
-          if (fileExtension === 'jpg' || fileExtension === 'png') {
+          if (fileExtension === 'jpg' ||
+            fileExtension === 'png' ||
+            fileExtension === 'gif' ||
+            fileExtension === 'jpeg') {
             this.setState({ isImage: true });
           } else {
             if (this.state.isMobile) {
