@@ -29,7 +29,7 @@ class Header extends Component {
                     </div>
                   ) : (
                     <div className="fixed pin-t mt-1 pin-r mr-1 z-50 xl:relative xl:flex xl:justify-start xl:justify-end xl:text-right xl:justify-end xl:mt-8 xl:mr-24">
-                      <InitialsCircle/>
+                      <InitialsCircle/> 
                     </div>
                   )
                 }
