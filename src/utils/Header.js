@@ -16,8 +16,8 @@ class Header extends Component {
               <div className="xl:w-1/3"/>
 
               <div className="xl:w-1/3">
-                <div className="flex justify-center">
-                  <Link to="/"><img src="DashSizedFinal.png" alt="Dash" className="h-24 ml-2 xl:ml-0 mt-4 hover:border-grey-darkest border-b-2"/></Link>
+                <div className="flex justify-center max-w-md ">
+                  <Link to="/"><img src="speedegree.png" alt="Dash" className="ml-2 xl:ml-0 mt-4"/></Link>
                 </div>
               </div>
 

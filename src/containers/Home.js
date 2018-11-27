@@ -50,6 +50,7 @@ class Home extends Component {
         </div>
       )
     } else {
+
       // the form hasn't been submitted yet, so show form
       if (!this.props.requestSent) {
         return (
@@ -66,6 +67,10 @@ class Home extends Component {
       return (
         <Loading/>
       );
+
+
+
+
     }
   }
 }
