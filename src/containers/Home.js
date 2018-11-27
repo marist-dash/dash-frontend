@@ -50,23 +50,26 @@ class Home extends Component {
         </div>
       )
     } else {
+
+      // the form hasn't been submitted yet, so show form
+      if (!this.props.requestSent) {
+        return (
+          <div>
+
+            <div className="flex justify-center">
+              <Form/>
+            </div>
+
+          </div>
+        );
+      }
+      // if no student object but form submitted, show loading screen
       return (
         <Loading/>
       );
 
-      // // the form hasn't been submitted yet, so show form
-      // if (!this.props.requestSent) {
-      //   return (
-      //     <div>
-      //
-      //       <div className="flex justify-center">
-      //         <Form/>
-      //       </div>
-      //
-      //     </div>
-      //   );
-      // }
-      // if no student object but form submitted, show loading screen
+
+
 
     }
   }
