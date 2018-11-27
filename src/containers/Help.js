@@ -58,7 +58,7 @@ class Help extends Component {
                         className="flex justify-between m-2 p-2 hoverableDiv text-grey-darkest text-2xl text-left"
                         onClick={() => this.toggleShowProps(index)}>
                         {/* Title */}
-                        <div> {helpItem.title} </div>
+                        <div>{htmlToReactParser.parse(helpItem.title)} </div>
 
                         {/* Drop down/up caret */}
                         <div>
