@@ -46,7 +46,7 @@ class Help extends Component {
             <div className="flex flex-col max-w-md p-2 bg-white rounded-lg shadow-lg">
 
               {/* FAQ title */}
-              <p className="p-2 m-2 text-center text-3xl text-grey-darkest font-bold">Common questions about Dash</p>
+              <p className="p-2 m-2 text-center text-3xl text-grey-darkest font-bold">Common questions about SpeeDegree</p>
 
               {/* Map through help items */}
               {

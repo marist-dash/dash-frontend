@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Route, BrowserRouter as Router} from "react-router-dom";
 import Home from "./containers/Home";
 import Help from "./containers/Help";
+import Dog from "./containers/Dog";
 import Footer from "./utils/Footer";
 import connect from "react-redux/es/connect/connect";
 import Header from "./utils/Header";
@@ -63,6 +64,9 @@ class App extends Component {
 
               {/* Help route */}
               <Route path="/help" component={Help} />
+
+              {/* Dog route (Easter Egg) */}
+              <Route path="/dog" component={Dog}/>
 
               {/* Fixed footer */}
               <div className="pt-16">

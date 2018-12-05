@@ -2,7 +2,7 @@
 
 //Import Statements
 import React, { Component } from 'react';
-import { withRouter} from 'react-router-dom'
+import { withRouter} from 'react-router-dom';
 import {connect} from "react-redux";
 import {FaFileExport, FaCheckCircle, FaTimesCircle} from "react-icons/fa";
 
@@ -28,6 +28,12 @@ class Form extends Component {
     });
 
     if (event.target.name === 'username') {
+
+      // Easter Egg
+      if (event.target.value.toLowerCase() === 'dog') {
+        this.props.history.push("/dog");
+      }
+
       this.props.dispatch({
         type: 'USERNAME',
         username: event.target.value
@@ -233,7 +239,7 @@ class Form extends Component {
 
           {/* Copyright */}
           <p className="text-center text-grey text-xs">
-            © {new Date().getFullYear()} Dash. All rights reserved.
+            © {new Date().getFullYear()} SpeeDegree
           </p>
 
         </div>

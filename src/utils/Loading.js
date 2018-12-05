@@ -22,34 +22,38 @@ class Loading extends Component {
   }
 
   fetchMediaItem = () => {
-
     axios.get(mediaEndpoint)
       .then( (response) => {
-        this.setState({ mediaUrl: response.data.url.toLowerCase() }, () => {
-          // get file type
-          var i = this.state.mediaUrl.length;
-          var fileExtension = '';
-          while (this.state.mediaUrl.charAt(i) !== '.') {
-            fileExtension = this.state.mediaUrl.charAt(i) + fileExtension;
-            i--;
-          }
-          // check for image or video
-          if (fileExtension === 'jpg' ||
-            fileExtension === 'png' ||
-            fileExtension === 'gif' ||
-            fileExtension === 'jpeg') {
-            this.setState({ isImage: true });
-          } else {
-            if (this.state.isMobile) {
-              // don't show videos on mobile (including gifs)
-              this.fetchMediaItem();
-            } else {
-              this.setState({ isImage: false });
-            }
-          }
-        });
-      }).catch( (response) => {
-    });
+        this.processMediaItem(response.data.url);
+      })
+  };
+
+  processMediaItem = (mediaUrl) => {
+    // get file type
+    var i = mediaUrl.length;
+    var fileExtension = '';
+    while (mediaUrl.charAt(i) !== '.') {
+      fileExtension = mediaUrl.charAt(i) + fileExtension;
+      i--;
+    }
+
+    // check for image or video
+    fileExtension = fileExtension.toLowerCase();
+    const imageFormats = new Set(['jpg', 'png', 'gif', 'jpeg']);
+
+    if (imageFormats.has(fileExtension)) {
+      // update state for the new image
+      this.setState({ isImage: true, mediaUrl: mediaUrl });
+    } else {
+      if (this.state.isMobile) {
+        // don't show videos on mobile
+        this.fetchMediaItem();
+      } else {
+        // update state for the new video
+        this.setState({ isImage: false, mediaUrl: mediaUrl });
+      }
+    }
+
   };
 
   render() {
@@ -66,7 +70,7 @@ class Loading extends Component {
         <div className="flex justify-center mx-2 rounded-lg">
           {
             this.state.isImage ? (
-              <img style={mediaStyles} src={this.state.mediaUrl} className="rounded-lg shadow-lg" alt="doggo"/>
+              <img style={mediaStyles} src={this.state.mediaUrl} className="rounded-lg shadow-lg" alt="Dog"/>
             ) : (
               <video style={mediaStyles} controls autoPlay className="rounded-lg shadow-lg" >
                 <source src={this.state.mediaUrl} type="video/mp4"/>
@@ -81,9 +85,11 @@ class Loading extends Component {
           </button>
         </div>
 
+        {this.props.showSpinner &&
         <div className="flex justify-center">
           <p className="h-4 text-center icon-spin"/>
         </div>
+        }
 
       </div>
     );
